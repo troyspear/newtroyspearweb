@@ -1,0 +1,13 @@
+TROY SPEAR UNDERWATER ROBOTICS
+ROBOSUB 2023 TECHNICAL DESIGN REPORT (TDR)
+
+This PDF file is a placeholder for the 2023 Technical Design Report for the vehicle: Nautilus.
+
+This document details the inaugural design, engineering, and testing phases of the Nautilus AUV, including:
+1. Basic modular PVC frame assembly and manual static buoyancy leveling.
+2. Single-camera vision streaming and custom thruster configurations.
+3. Arduino Mega controller interface and serial communications.
+4. Python script color matching filters for gate target detection.
+5. Budgetary bounds and rookie team structure configurations.
+
+Competition Result: RoboSub 2023 Rookie of the Year Award Winner.

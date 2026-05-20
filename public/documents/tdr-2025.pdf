@@ -1,0 +1,13 @@
+TROY SPEAR UNDERWATER ROBOTICS
+ROBOSUB 2025 TECHNICAL DESIGN REPORT (TDR)
+
+This PDF file is a placeholder for the 2025 Technical Design Report for the vehicle: Poseidon Mk. I.
+
+This document details the complete design, engineering, and testing phases of the Poseidon Mk. I autonomous underwater vehicle, including:
+1. Hydrodynamic hull optimization, modular acrylic frame stability calculations.
+2. Custom pressure hull seal test procedures and waterproof connector routing.
+3. Power distribution schematics (24V LiPo batteries, dual buck-boost regulators).
+4. Sensor suite integration (DVL, IMU, Doppler depth sensor, stereo forward cameras).
+5. Software architectures (ROS 2 Humble, Kalman Filter sensor fusion, YOLO v8 inference).
+
+Competition Result: RoboSub 2025 Semifinalist, Best Mechanical Design Award Nominee.

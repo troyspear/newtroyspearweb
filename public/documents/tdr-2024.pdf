@@ -1,0 +1,13 @@
+TROY SPEAR UNDERWATER ROBOTICS
+ROBOSUB 2024 TECHNICAL DESIGN REPORT (TDR)
+
+This PDF file is a placeholder for the 2024 Technical Design Report for the vehicle: Triton.
+
+This document details the complete design, engineering, and testing phases of the Triton AUV, including:
+1. SolidWorks hull stress analysis and rapid-prototyped composite thruster ducts.
+2. Custom electronic speed controller (ESC) carrier board PCB layouts.
+3. High-level path planning state machines (SMC) and OpenCV color segmentation.
+4. Active pitch/roll PID tuning trials and depth-holding calibration graphs.
+5. Torpedo pneumatic launcher launch trajectories and acoustic hydrophone arrays.
+
+Competition Result: RoboSub 2024 Top 12, Best Technical Documentation Award Winner.

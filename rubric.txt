@@ -1,0 +1,62 @@
+# 2.2 Team Website
+
+Teams are required to submit a website in English that documents their team, vehicle design, and competition approach. To be eligible for full points, teams must submit their website by the deadline found in [Section 1.5.](https://robonation.gitbook.io/robosub-resources/section-2-design-documentation/pages/SPn1n0KVYJasHRyd1enj#id-1.5-competition-schedule-and-timeline)
+
+{% hint style="success" %}
+**Top-Scored Website:** Get inspiration from National University of Singapore's first place website from RoboSub 2025. Visit the [website here](https://bumblebee.sg/).
+{% endhint %}
+
+## 2.2.1 Deliverable Requirements:
+
+1. Website Content: Layout and detailed contents of the website are left for the teams to develop; however, the team website must include:
+   * Current team name and contact information
+   * Vehicle photos and/or videos
+   * Test event summaries showing time in the field (water time, etc.), objectives, and results. This should include simulations and real-world testing.
+   * Supporting media, which may include:
+     * Instructional/Informative videos
+     * Procedures (text, images)
+     * Design decision documentation (text, images, videos)
+     * Blogs for historical records of build progress
+   * List of sponsors with logos
+2. Website Quality: Websites are often the first impression of a project. Potential supporters such as supervisors, sponsors, or advisors must find the website visually appealing and easy to navigate. Development of the website should include careful consideration of user experience, including:
+   * Written in English, or English translation provided
+   * Clear prioritization of key content
+   * Site search functionality
+   * Basic design elements: contrast, repetition, alignment and grouping to organize/highlight content
+   * User accessibility, as defined by the [W3C Web Accessibility Initiative: www.w3.org/WAI](https://www.w3.org/WAI/)
+   * Cross browser compatibility for modern web browsers (Chrome, Firefox, Safari, MS Edge)
+   * A mobile friendly display
+
+## 2.2.2 Scoring Metrics
+
+The website submission is worth a total of **180 points**. The scoring metrics include a scoring weight with guidance for scoring considerations that are provided to the judges during evaluations.
+
+#### **Team Information** (20% of score)
+
+<table data-header-hidden><thead><tr><th width="150"></th><th></th></tr></thead><tbody><tr><td>Outstanding</td><td>Team website includes all required content: team’s name and contact information, vehicle photos and test summaries, and a list of team members and sponsors. All mentions of the vehicle are relevant to the current competition year.</td></tr><tr><td><p> </p><p>Strong</p><p> </p></td><td>Team website provides a brief introduction to the team, team members and sponsors. There is supporting media on the vehicle.</td></tr><tr><td><p> </p><p>Average</p><p> </p></td><td>Team website introduces the team and/or team members.</td></tr><tr><td><p> </p><p>Below Average</p><p> </p></td><td>Team website provides little to no information on the team. There is no mention of the vehicle.</td></tr><tr><td><p> </p><p>Requirements Not Met</p><p> </p></td><td>The required team information is not included on the website.</td></tr></tbody></table>
+
+#### **Vehicle Design Documentation** (40% of score)
+
+<table data-header-hidden><thead><tr><th width="150"></th><th></th></tr></thead><tbody><tr><td>Outstanding</td><td>Vehicle development and testing process is thoroughly documented with instructional and informative supporting media and historical recording. This could include photographs, diagrams, videos, procedures (text + images), design documentation (text + images + video), or blogs for historical records.</td></tr><tr><td><p> </p><p>Strong</p><p> </p></td><td>Good documentation on vehicle development and testing process is provided. Supporting media is accessible.</td></tr><tr><td><p> </p><p>Average</p><p> </p></td><td>Vehicle development and testing process is adequately presented with some evidence of supporting media.[LI1] </td></tr><tr><td><p> </p><p>Below Average</p><p> </p></td><td>Few pictures or videos of the vehicle, but no instructional or informative documentation included.</td></tr><tr><td><p> </p><p>Requirements Not Met</p><p> </p></td><td>No visuals or documentation of the vehicle is available on the website.</td></tr></tbody></table>
+
+#### &#x20;**Website Quality** (40% of score)
+
+<table data-header-hidden><thead><tr><th width="150"></th><th></th></tr></thead><tbody><tr><td>Outstanding</td><td>Website places a heavy emphasis on human factors. Layout is visually appealing, easily maneuverable, and does an excellent job of drawing user’s attention to relevant content.</td></tr><tr><td><p> </p><p>Strong</p><p> </p></td><td>Website considers user experience. Layout does a good job of drawing user’s attention. Users can navigate the site easily and quickly.</td></tr><tr><td><p> </p><p>Average</p><p> </p></td><td>Website quality was adequate. Users can navigate the site to find most information.</td></tr><tr><td><p> </p><p>Below Average</p><p> </p></td><td>Layout and/or design makes it difficult to find information. Website does not have a user-friendly display.</td></tr><tr><td><p> </p><p>Requirements Not Met</p><p> </p></td><td>Website is busy and difficult to read; no guidance on maneuvering site.</td></tr></tbody></table>
+
+
+---
+
+# Agent Instructions: Querying This Documentation
+
+If you need additional information that is not directly available in this page, you can query the documentation dynamically by asking a question.
+
+Perform an HTTP GET request on the current page URL with the `ask` query parameter:
+
+```
+GET https://robonation.gitbook.io/robosub-resources/section-2-design-documentation/2.2-team-website.md?ask=<question>
+```
+
+The question should be specific, self-contained, and written in natural language.
+The response will contain a direct answer to the question and relevant excerpts and sources from the documentation.
+
+Use this mechanism when the answer is not explicitly present in the current page, you need clarification or additional context, or you want to retrieve related documentation sections.

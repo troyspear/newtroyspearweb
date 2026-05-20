@@ -14,13 +14,13 @@ export default function SeaPlusPlusPage() {
         <div className="max-w-6xl mx-auto">
           <Link
             href="/vehicle"
-            className="inline-flex items-center gap-1.5 text-xs font-medium text-fg-muted hover:text-fg transition-colors mb-8"
+            className="flex items-center gap-1.5 text-xs font-medium text-fg-muted hover:text-fg transition-colors mb-8 w-fit"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             Back to Vehicle
           </Link>
 
-          <span className="text-[10px] font-semibold text-accent bg-accent-subtle px-2.5 py-1 rounded-full uppercase tracking-wider">
+          <span className="inline-block text-[10px] font-semibold text-accent bg-accent-subtle px-2.5 py-1 rounded-full uppercase tracking-wider">
             RoboSub 2022–2023
           </span>
           <h1 className="font-display text-3xl sm:text-4xl font-light text-fg tracking-tight mt-4">

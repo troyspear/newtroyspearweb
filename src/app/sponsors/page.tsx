@@ -33,7 +33,7 @@ export default function SponsorsPage() {
         </div>
       </section>
 
-      <section className="px-5 sm:px-8 pb-16">
+      <section className="px-5 sm:px-8 pb-16 -mt-6">
         <div className="max-w-6xl mx-auto">
           <h2 className="font-display text-lg sm:text-xl font-medium text-fg tracking-tight mb-8">
             Our Partners

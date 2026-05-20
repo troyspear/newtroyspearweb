@@ -1,7 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import { X, Camera } from 'lucide-react'
+import Image from 'next/image'
+import { X } from 'lucide-react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { galleryItems, type GalleryItem } from '@/lib/data/gallery-items'
 import { cn } from '@/lib/utils'
@@ -70,9 +71,13 @@ export default function GalleryPage() {
                 onClick={() => setLightbox(item)}
                 className="group relative aspect-square rounded-lg overflow-hidden bg-surface hover:opacity-80 transition-opacity"
               >
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <Camera className="w-6 h-6 text-fg-muted/30" />
-                </div>
+                <Image
+                  src={item.src}
+                  alt={item.alt}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                />
               </button>
             ))}
           </div>
@@ -96,8 +101,14 @@ export default function GalleryPage() {
               className="relative max-w-2xl w-full bg-elevated rounded-xl overflow-hidden"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="aspect-video bg-surface flex items-center justify-center">
-                <Camera className="w-12 h-12 text-fg-muted/20" />
+              <div className="relative aspect-video bg-surface">
+                <Image
+                  src={lightbox.src}
+                  alt={lightbox.alt}
+                  fill
+                  className="object-contain"
+                  sizes="(max-width: 672px) 100vw, 672px"
+                />
               </div>
               <div className="p-5">
                 <p className="text-sm font-medium text-fg">{lightbox.caption}</p>

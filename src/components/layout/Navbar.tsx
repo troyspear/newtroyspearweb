@@ -11,7 +11,6 @@ const vehicleDropdownItems = [
   { href: '/vehicle/past/krabby-patty', label: 'Krabby Patty' },
   { href: '/vehicle/past/aura', label: 'Aura' },
   { href: '/vehicle/past/sea-plus-plus', label: 'Sea++' },
-  { href: '/vehicle/tdrs', label: 'Technical Design Reports' },
 ]
 
 const navLinks = [
@@ -63,7 +62,7 @@ export default function Navbar({ onSearchOpen }: { onSearchOpen: () => void }) {
 
   return (
     <>
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-page/70 backdrop-blur-xl border-b border-glass-border">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-page/95 dark:bg-page/70 backdrop-blur-xl border-b border-glass-border">
         <div className="max-w-6xl mx-auto px-5 sm:px-8">
           <div className="flex items-center justify-between h-14">
             <Link href="/" className="flex items-center gap-2.5 shrink-0">

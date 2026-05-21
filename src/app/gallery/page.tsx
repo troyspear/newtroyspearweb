@@ -1,8 +1,8 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import Image from 'next/image'
-import { X } from 'lucide-react'
+import { X, ChevronLeft, ChevronRight } from 'lucide-react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { galleryItems, type GalleryItem } from '@/lib/data/gallery-items'
 import { cn } from '@/lib/utils'
@@ -20,13 +20,53 @@ const years = [...new Set(galleryItems.map((i) => i.year))].sort((a, b) => b - a
 export default function GalleryPage() {
   const [category, setCategory] = useState<string | null>(null)
   const [year, setYear] = useState<number | null>(null)
-  const [lightbox, setLightbox] = useState<GalleryItem | null>(null)
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
+  const touchStartX = useRef<number | null>(null)
 
   const filtered = galleryItems.filter((item) => {
     if (category && item.category !== category) return false
     if (year && item.year !== year) return false
     return true
   })
+
+  const lightbox = lightboxIndex !== null ? filtered[lightboxIndex] : null
+
+  const goNext = useCallback(() => {
+    if (lightboxIndex === null) return
+    setLightboxIndex((lightboxIndex + 1) % filtered.length)
+  }, [lightboxIndex, filtered.length])
+
+  const goPrev = useCallback(() => {
+    if (lightboxIndex === null) return
+    setLightboxIndex((lightboxIndex - 1 + filtered.length) % filtered.length)
+  }, [lightboxIndex, filtered.length])
+
+  const close = useCallback(() => setLightboxIndex(null), [])
+
+  useEffect(() => {
+    if (lightboxIndex === null) return
+    function handleKey(e: KeyboardEvent) {
+      if (e.key === 'ArrowRight') goNext()
+      else if (e.key === 'ArrowLeft') goPrev()
+      else if (e.key === 'Escape') close()
+    }
+    window.addEventListener('keydown', handleKey)
+    return () => window.removeEventListener('keydown', handleKey)
+  }, [lightboxIndex, goNext, goPrev, close])
+
+  function handleTouchStart(e: React.TouchEvent) {
+    touchStartX.current = e.touches[0].clientX
+  }
+
+  function handleTouchEnd(e: React.TouchEvent) {
+    if (touchStartX.current === null) return
+    const diff = e.changedTouches[0].clientX - touchStartX.current
+    if (Math.abs(diff) > 50) {
+      if (diff < 0) goNext()
+      else goPrev()
+    }
+    touchStartX.current = null
+  }
 
   return (
     <div className="pt-20 pb-16">
@@ -65,10 +105,10 @@ export default function GalleryPage() {
           </div>
 
           <div className="mt-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
-            {filtered.map((item) => (
+            {filtered.map((item, i) => (
               <button
                 key={item.id}
-                onClick={() => setLightbox(item)}
+                onClick={() => setLightboxIndex(i)}
                 className="group relative aspect-square rounded-lg overflow-hidden bg-surface hover:opacity-80 transition-opacity"
               >
                 <Image
@@ -95,8 +135,26 @@ export default function GalleryPage() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
-            onClick={() => setLightbox(null)}
+            onClick={close}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
           >
+            <button
+              onClick={(e) => { e.stopPropagation(); goPrev() }}
+              className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 text-white/80 hover:text-white transition-colors z-10"
+              aria-label="Previous image"
+            >
+              <ChevronLeft className="w-6 h-6" />
+            </button>
+
+            <button
+              onClick={(e) => { e.stopPropagation(); goNext() }}
+              className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 text-white/80 hover:text-white transition-colors z-10"
+              aria-label="Next image"
+            >
+              <ChevronRight className="w-6 h-6" />
+            </button>
+
             <div
               className="relative max-w-2xl w-full bg-elevated rounded-xl overflow-hidden"
               onClick={(e) => e.stopPropagation()}
@@ -110,12 +168,17 @@ export default function GalleryPage() {
                   sizes="(max-width: 672px) 100vw, 672px"
                 />
               </div>
-              <div className="p-5">
-                <p className="text-sm font-medium text-fg">{lightbox.caption}</p>
-                <p className="text-xs text-fg-muted mt-1">{lightbox.date}</p>
+              <div className="p-5 flex items-start justify-between gap-4">
+                <div>
+                  <p className="text-sm font-medium text-fg">{lightbox.caption}</p>
+                  <p className="text-xs text-fg-muted mt-1">{lightbox.date}</p>
+                </div>
+                <span className="text-xs text-fg-muted shrink-0">
+                  {lightboxIndex! + 1} / {filtered.length}
+                </span>
               </div>
               <button
-                onClick={() => setLightbox(null)}
+                onClick={close}
                 className="absolute top-3 right-3 p-1.5 rounded-full bg-black/40 text-white/70 hover:text-white transition-colors"
               >
                 <X className="w-4 h-4" />

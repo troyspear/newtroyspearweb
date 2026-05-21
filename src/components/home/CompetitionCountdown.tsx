@@ -16,6 +16,8 @@ function getTimeLeft() {
   }
 }
 
+const units = ['Days', 'Hours', 'Min', 'Sec'] as const
+
 export default function CompetitionCountdown() {
   const [timeLeft, setTimeLeft] = useState<ReturnType<typeof getTimeLeft> | null>(null)
 
@@ -32,21 +34,19 @@ export default function CompetitionCountdown() {
           Countdown to {COMPETITION_NAME}
         </h2>
         <div className="flex justify-center gap-4 sm:gap-8">
-          {[
-            { value: timeLeft?.days ?? 0, label: 'Days' },
-            { value: timeLeft?.hours ?? 0, label: 'Hours' },
-            { value: timeLeft?.minutes ?? 0, label: 'Min' },
-            { value: timeLeft?.seconds ?? 0, label: 'Sec' },
-          ].map((unit) => (
-            <div key={unit.label} className="flex flex-col items-center">
-              <span className="font-display text-3xl sm:text-5xl font-light text-fg tabular-nums">
-                {String(unit.value).padStart(2, '0')}
-              </span>
-              <span className="mt-1 text-[10px] sm:text-xs text-fg-muted uppercase tracking-wider">
-                {unit.label}
-              </span>
-            </div>
-          ))}
+          {units.map((label) => {
+            const key = label === 'Min' ? 'minutes' : label === 'Sec' ? 'seconds' : label.toLowerCase() as keyof NonNullable<typeof timeLeft>
+            return (
+              <div key={label} className="flex flex-col items-center">
+                <span className="font-display text-3xl sm:text-5xl font-light text-fg tabular-nums min-w-[2ch] text-center">
+                  {timeLeft ? String(timeLeft[key]).padStart(2, '0') : '—'}
+                </span>
+                <span className="mt-1 text-[10px] sm:text-xs text-fg-muted uppercase tracking-wider">
+                  {label}
+                </span>
+              </div>
+            )
+          })}
         </div>
       </div>
     </section>

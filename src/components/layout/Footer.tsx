@@ -36,7 +36,7 @@ export default function Footer() {
               ))}
             </div>
             <p className="text-xs text-fg-muted">
-              &copy; {new Date().getFullYear()} Troy SPEAR
+              &copy; 2025 Troy SPEAR
             </p>
           </div>
         </div>

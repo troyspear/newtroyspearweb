@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import Script from 'next/script'
 import ClientShell from '@/components/layout/ClientShell'
 import './globals.css'
 
@@ -13,6 +12,8 @@ export const metadata: Metadata = {
   keywords: ['RoboSub', 'underwater robotics', 'AUV', 'Troy High School', 'SPEAR', 'RoboNation'],
 }
 
+const themeScript = `(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme:dark)').matches)){document.documentElement.classList.add('dark')}}catch(e){}})()`;
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -21,13 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full antialiased" suppressHydrationWarning>
       <head>
-        <Script
-          id="theme-init"
-          strategy="beforeInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme:dark)').matches)){document.documentElement.classList.add('dark')}}catch(e){}})()`,
-          }}
-        />
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body className="min-h-full flex flex-col">
         <ClientShell>{children}</ClientShell>

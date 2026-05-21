@@ -104,20 +104,27 @@ export default function GalleryPage() {
             ))}
           </div>
 
-          <div className="mt-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+          <div className="mt-10 columns-2 md:columns-3 lg:columns-4 gap-3 space-y-3">
             {filtered.map((item, i) => (
               <button
                 key={item.id}
                 onClick={() => setLightboxIndex(i)}
-                className="group relative aspect-square rounded-lg overflow-hidden bg-surface hover:opacity-80 transition-opacity"
+                className="group relative w-full rounded-lg overflow-hidden bg-surface hover:opacity-90 transition-opacity break-inside-avoid"
               >
                 <Image
                   src={item.src}
                   alt={item.alt}
-                  fill
-                  className="object-cover"
+                  width={item.orientation === 'landscape' ? 800 : 500}
+                  height={item.orientation === 'landscape' ? 533 : 667}
+                  className="w-full h-auto object-cover"
                   sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                  loading={i < 8 ? 'eager' : 'lazy'}
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="absolute bottom-0 left-0 right-0 p-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <p className="text-xs font-medium text-white leading-snug">{item.caption}</p>
+                  <p className="text-[10px] text-white/70 mt-0.5">{item.date}</p>
+                </div>
               </button>
             ))}
           </div>
@@ -156,16 +163,21 @@ export default function GalleryPage() {
             </button>
 
             <div
-              className="relative max-w-2xl w-full bg-elevated rounded-xl overflow-hidden"
+              className={cn(
+                'relative w-full bg-elevated rounded-xl overflow-hidden',
+                lightbox.orientation === 'portrait' ? 'max-w-md' : 'max-w-3xl'
+              )}
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="relative aspect-video bg-surface">
+              <div className="relative bg-surface flex items-center justify-center">
                 <Image
                   src={lightbox.src}
                   alt={lightbox.alt}
-                  fill
-                  className="object-contain"
-                  sizes="(max-width: 672px) 100vw, 672px"
+                  width={lightbox.orientation === 'landscape' ? 1200 : 600}
+                  height={lightbox.orientation === 'landscape' ? 800 : 800}
+                  className="w-full h-auto max-h-[75vh] object-contain"
+                  sizes="(max-width: 768px) 100vw, 768px"
+                  priority
                 />
               </div>
               <div className="p-5 flex items-start justify-between gap-4">

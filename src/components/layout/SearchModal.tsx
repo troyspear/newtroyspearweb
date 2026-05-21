@@ -1,10 +1,9 @@
 'use client'
 
-import { useState, useEffect, useRef, useCallback } from 'react'
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react'
 import { Search, X, FileText, Users, Wrench, Image as ImageIcon } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
-import Fuse from 'fuse.js'
 
 interface SearchItem {
   title: string
@@ -29,15 +28,6 @@ const searchData: SearchItem[] = [
   { title: 'Propulsion System', description: 'Thruster configuration', href: '/vehicle#propulsion', category: 'Vehicle' },
 ]
 
-const fuse = new Fuse(searchData, {
-  keys: [
-    { name: 'title', weight: 2 },
-    { name: 'description', weight: 1 },
-    { name: 'category', weight: 1.5 },
-  ],
-  threshold: 0.3,
-})
-
 const categoryIcons: Record<string, typeof Search> = {
   Pages: FileText,
   Team: Users,
@@ -47,17 +37,38 @@ const categoryIcons: Record<string, typeof Search> = {
 
 export default function SearchModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
   const [query, setQuery] = useState('')
+  const [fuseInstance, setFuseInstance] = useState<import('fuse.js').default<SearchItem> | null>(null)
   const inputRef = useRef<HTMLInputElement>(null)
 
-  const results = query.length > 0
-    ? fuse.search(query).slice(0, 8).map((r) => r.item)
-    : searchData.slice(0, 6)
+  useEffect(() => {
+    if (isOpen && !fuseInstance) {
+      import('fuse.js').then((mod) => {
+        const Fuse = mod.default
+        setFuseInstance(new Fuse(searchData, {
+          keys: [
+            { name: 'title', weight: 2 },
+            { name: 'description', weight: 1 },
+            { name: 'category', weight: 1.5 },
+          ],
+          threshold: 0.3,
+        }))
+      })
+    }
+  }, [isOpen, fuseInstance])
 
-  const grouped = results.reduce<Record<string, SearchItem[]>>((acc, item) => {
-    if (!acc[item.category]) acc[item.category] = []
-    acc[item.category].push(item)
-    return acc
-  }, {})
+  const results = useMemo(() => {
+    if (query.length === 0) return searchData.slice(0, 6)
+    if (!fuseInstance) return []
+    return fuseInstance.search(query).slice(0, 8).map((r) => r.item)
+  }, [query, fuseInstance])
+
+  const grouped = useMemo(() => {
+    return results.reduce<Record<string, SearchItem[]>>((acc, item) => {
+      if (!acc[item.category]) acc[item.category] = []
+      acc[item.category].push(item)
+      return acc
+    }, {})
+  }, [results])
 
   useEffect(() => {
     if (isOpen) {

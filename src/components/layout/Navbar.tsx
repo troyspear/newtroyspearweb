@@ -25,7 +25,7 @@ const navLinks = [
 
 export default function Navbar({ onSearchOpen }: { onSearchOpen: () => void }) {
   const [mobileOpen, setMobileOpen] = useState(false)
-  const [dark, setDark] = useState(false)
+  const [dark, setDark] = useState<boolean | null>(null)
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
@@ -125,13 +125,15 @@ export default function Navbar({ onSearchOpen }: { onSearchOpen: () => void }) {
             </div>
 
             <div className="flex items-center gap-3">
-              <button
-                onClick={toggleDark}
-                className="text-fg-muted hover:text-fg transition-colors"
-                aria-label="Toggle dark mode"
-              >
-                {dark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-              </button>
+              {dark !== null && (
+                <button
+                  onClick={toggleDark}
+                  className="text-fg-muted hover:text-fg transition-colors"
+                  aria-label="Toggle dark mode"
+                >
+                  {dark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+                </button>
+              )}
               <button
                 onClick={onSearchOpen}
                 className="text-fg-muted hover:text-fg transition-colors"

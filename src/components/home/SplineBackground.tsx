@@ -2,8 +2,8 @@
 
 import Spline from '@splinetool/react-spline'
 
-const LIGHT_SCENE = 'https://prod.spline.design/W5IhX-wbI3VOBau6/scene.splinecode'
-const DARK_SCENE = 'https://prod.spline.design/uZEW89nK627-7QTa/scene.splinecode'
+const LIGHT_SCENE = 'https://prod.spline.design/5Msated5udqyzEIg/scene.splinecode'
+const DARK_SCENE = 'https://prod.spline.design/k4H6sfDMY1-R5B52/scene.splinecode'
 
 export default function SplineBackground() {
   return (
@@ -13,7 +13,6 @@ export default function SplineBackground() {
       </div>
       <div className="absolute inset-0 hidden dark:block">
         <Spline scene={DARK_SCENE} style={{ width: '100%', height: '100%' }} />
-        <div className="absolute inset-0 bg-gradient-to-r from-page/95 via-page/50 to-transparent pointer-events-none" />
       </div>
     </div>
   )

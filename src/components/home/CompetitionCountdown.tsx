@@ -2,25 +2,25 @@
 
 import { useState, useEffect } from 'react'
 
-const COMPETITION_DATE = new Date('2026-08-03T08:00:00-07:00')
+const COMPETITION_DATE = new Date('2026-07-11T08:00:00-07:00')
 const COMPETITION_NAME = 'RoboSub 2026'
 
-export default function CompetitionCountdown() {
-  const [timeLeft, setTimeLeft] = useState(getTimeLeft())
-
-  function getTimeLeft() {
-    const now = new Date()
-    const diff = COMPETITION_DATE.getTime() - now.getTime()
-    if (diff <= 0) return { days: 0, hours: 0, minutes: 0, seconds: 0 }
-    return {
-      days: Math.floor(diff / (1000 * 60 * 60 * 24)),
-      hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
-      minutes: Math.floor((diff / (1000 * 60)) % 60),
-      seconds: Math.floor((diff / 1000) % 60),
-    }
+function getTimeLeft() {
+  const diff = COMPETITION_DATE.getTime() - Date.now()
+  if (diff <= 0) return { days: 0, hours: 0, minutes: 0, seconds: 0 }
+  return {
+    days: Math.floor(diff / (1000 * 60 * 60 * 24)),
+    hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
+    minutes: Math.floor((diff / (1000 * 60)) % 60),
+    seconds: Math.floor((diff / 1000) % 60),
   }
+}
+
+export default function CompetitionCountdown() {
+  const [timeLeft, setTimeLeft] = useState<ReturnType<typeof getTimeLeft> | null>(null)
 
   useEffect(() => {
+    setTimeLeft(getTimeLeft())
     const interval = setInterval(() => setTimeLeft(getTimeLeft()), 1000)
     return () => clearInterval(interval)
   }, [])
@@ -33,10 +33,10 @@ export default function CompetitionCountdown() {
         </h2>
         <div className="flex justify-center gap-4 sm:gap-8">
           {[
-            { value: timeLeft.days, label: 'Days' },
-            { value: timeLeft.hours, label: 'Hours' },
-            { value: timeLeft.minutes, label: 'Min' },
-            { value: timeLeft.seconds, label: 'Sec' },
+            { value: timeLeft?.days ?? 0, label: 'Days' },
+            { value: timeLeft?.hours ?? 0, label: 'Hours' },
+            { value: timeLeft?.minutes ?? 0, label: 'Min' },
+            { value: timeLeft?.seconds ?? 0, label: 'Sec' },
           ].map((unit) => (
             <div key={unit.label} className="flex flex-col items-center">
               <span className="font-display text-3xl sm:text-5xl font-light text-fg tabular-nums">

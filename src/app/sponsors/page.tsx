@@ -129,10 +129,10 @@ export default function SponsorsPage() {
                 Get in touch with us
               </a>
               <a
-                href="mailto:contact@troyspear.com"
+                href="mailto:contact@troyspear.org"
                 className="text-sm text-fg-muted hover:text-fg transition-colors"
               >
-                contact@troyspear.com
+                contact@troyspear.org
               </a>
             </div>
           </div>

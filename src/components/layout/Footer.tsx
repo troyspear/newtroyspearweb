@@ -29,7 +29,7 @@ const socialLinks = [
   { href: 'https://www.instagram.com/troyspear', label: 'Instagram', icon: InstagramIcon },
   { href: 'https://github.com/troyspear/', label: 'GitHub', icon: GithubIcon },
   { href: '#', label: 'LinkedIn', icon: LinkedinIcon },
-  { href: 'mailto:contact@troyspear.com', label: 'Email', icon: Mail },
+  { href: 'mailto:contact@troyspear.org', label: 'Email', icon: Mail },
 ]
 
 export default function Footer() {

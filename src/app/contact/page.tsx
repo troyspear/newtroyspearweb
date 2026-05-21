@@ -54,8 +54,8 @@ export default function ContactPage() {
                   <Mail className="w-4 h-4 text-fg-muted" />
                   <span className="text-xs font-medium text-fg-muted uppercase tracking-wide">Email</span>
                 </div>
-                <a href="mailto:contact@troyspear.com" className="text-sm text-fg hover:text-accent transition-colors">
-                  contact@troyspear.com
+                <a href="mailto:contact@troyspear.org" className="text-sm text-fg hover:text-accent transition-colors">
+                  contact@troyspear.org
                 </a>
               </div>
 
@@ -76,7 +76,7 @@ export default function ContactPage() {
                   {[
                     { icon: InstagramIcon, label: 'Instagram', href: 'https://www.instagram.com/troyspear' },
                     { icon: GithubIcon, label: 'GitHub', href: 'https://github.com/troyspear/' },
-                    { icon: Mail, label: 'Email', href: 'mailto:contact@troyspear.com' },
+                    { icon: Mail, label: 'Email', href: 'mailto:contact@troyspear.org' },
                   ].map((social) => (
                     <a
                       key={social.label}

@@ -2,14 +2,6 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-@font-face {
-  font-family: 'NB International';
-  src: url('/fonts/NBInternationalRegularWebfont.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
 @theme inline {
   --color-page: var(--page);
   --color-surface: var(--surface);
@@ -24,8 +16,8 @@
   --color-glass: var(--glass);
   --color-glass-border: var(--glass-border);
 
-  --font-sans: 'NB International', -apple-system, 'SF Pro Text', 'SF Pro Display', sans-serif;
-  --font-display: 'NB International', sans-serif;
+  --font-sans: var(--font-nb-international), -apple-system, 'SF Pro Text', 'SF Pro Display', sans-serif;
+  --font-display: var(--font-nb-international), sans-serif;
 }
 
 :root {
@@ -93,6 +85,19 @@ canvas + div {
   display: none !important;
 }
 
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-gradient-shift {
+  animation: gradient-shift 12s ease infinite;
+}
+
 @keyframes scroll {
   0% {
     transform: translateX(0);
@@ -103,7 +108,13 @@ canvas + div {
 }
 
 .animate-scroll {
-  animation: scroll 40s linear infinite;
+  animation: scroll 25s linear infinite;
+}
+
+@media (min-width: 640px) {
+  .animate-scroll {
+    animation-duration: 40s;
+  }
 }
 
 .animate-scroll:hover {

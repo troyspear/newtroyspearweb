@@ -1,6 +1,15 @@
 import type { Metadata } from 'next'
+import localFont from 'next/font/local'
 import ClientShell from '@/components/layout/ClientShell'
 import './globals.css'
+
+const nbInternational = localFont({
+  src: '../../public/fonts/NBInternationalRegularWebfont.woff2',
+  weight: '400',
+  style: 'normal',
+  display: 'swap',
+  variable: '--font-nb-international',
+})
 
 export const metadata: Metadata = {
   title: {
@@ -20,7 +29,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="h-full antialiased" suppressHydrationWarning>
+    <html lang="en" className={`h-full antialiased ${nbInternational.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>

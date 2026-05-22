@@ -3,8 +3,6 @@ import Image from 'next/image'
 import { Mail, FileText, ExternalLink, Users, Trophy, Wrench, Calendar } from 'lucide-react'
 import { sponsors, tierConfig } from '@/lib/data/sponsors'
 
-export const dynamic = 'force-dynamic'
-
 export const metadata: Metadata = {
   title: 'Sponsors',
   description: 'Our sponsors make Troy SPEAR possible. Learn how to support our team.',
@@ -64,6 +62,7 @@ export default function SponsorsPage() {
                           width={160}
                           height={60}
                           className={`object-contain max-w-full transition-transform ${config.logoSize}`}
+                          sizes="(max-width: 640px) 40vw, (max-width: 1024px) 28vw, 160px"
                         />
                       </a>
                     ))}

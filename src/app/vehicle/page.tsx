@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import SpecsTable from '@/components/vehicle/SpecsTable'
 import SubmarineViewerLoader from '@/components/vehicle/SubmarineViewerLoader'
 import { subsystems } from '@/lib/data/vehicle-specs'
-import { Zap, Eye, Cpu, Box } from 'lucide-react'
+import { Zap, Eye, Cpu, Box, Play } from 'lucide-react'
 
 const iconMap: Record<string, typeof Zap> = { zap: Zap, eye: Eye, cpu: Cpu, box: Box }
 
@@ -31,6 +31,30 @@ export default function VehiclePage() {
       <section className="px-5 sm:px-8 pb-16">
         <div className="max-w-5xl mx-auto">
           <SubmarineViewerLoader />
+        </div>
+      </section>
+
+      <section className="px-5 sm:px-8 pb-16">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="font-display text-sm font-medium text-fg-muted uppercase tracking-wide mb-4">
+            Vehicle Overview
+          </h2>
+          {/* Replace the placeholder below with a YouTube/Vimeo embed URL */}
+          <div className="relative aspect-video rounded-2xl overflow-hidden bg-surface border border-border-subtle">
+            {/* <iframe
+              src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+              title="Poseidon Mk. II — Vehicle Overview"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className="absolute inset-0 w-full h-full"
+            /> */}
+            <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 text-fg-muted">
+              <div className="w-14 h-14 rounded-full bg-accent/10 border border-accent/20 flex items-center justify-center">
+                <Play className="w-6 h-6 text-accent" />
+              </div>
+              <p className="text-xs">Vehicle overview video coming soon</p>
+            </div>
+          </div>
         </div>
       </section>
 

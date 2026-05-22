@@ -7,7 +7,7 @@ export default function ScrollingBanner() {
   const doubled = [...updates, ...updates]
 
   return (
-    <div className="fixed top-14 left-0 right-0 z-40 bg-page border-b border-accent/20 overflow-hidden">
+    <div role="marquee" aria-label="Recent updates" className="fixed top-14 left-0 right-0 z-40 bg-page border-b border-accent/20 overflow-hidden">
       <div className="flex animate-scroll">
         {doubled.map((update, i) => (
           <Link

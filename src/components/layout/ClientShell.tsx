@@ -23,7 +23,7 @@ export default function ClientShell({ children }: { children: React.ReactNode })
   return (
     <>
       <Navbar onSearchOpen={() => setSearchOpen(true)} />
-      <main className="flex-1">{children}</main>
+      <main id="main-content" className="flex-1">{children}</main>
       <Footer />
       <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
     </>

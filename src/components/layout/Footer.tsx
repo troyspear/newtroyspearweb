@@ -34,7 +34,7 @@ const socialLinks = [
 
 export default function Footer() {
   return (
-    <footer className="border-t border-accent/20">
+    <footer aria-label="Site footer" className="border-t border-accent/20">
       <div className="max-w-6xl mx-auto px-5 sm:px-8 py-10">
         <div className="flex flex-col sm:flex-row justify-between gap-8">
           <div>

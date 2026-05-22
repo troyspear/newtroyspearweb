@@ -36,4 +36,16 @@ export const updates: Update[] = [
     date: '2025-07-10',
     slug: 'electrical-system-overview',
   },
+  {
+    id: '6',
+    title: 'Pool Test #2 — Autonomous gate navigation, 4 hrs water time',
+    date: '2025-05-10',
+    slug: 'pool-test-may-2025',
+  },
+  {
+    id: '7',
+    title: 'Simulation Validation — Gazebo vs. real-world comparison',
+    date: '2025-04-18',
+    slug: 'simulation-validation',
+  },
 ]

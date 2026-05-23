@@ -1,9 +1,13 @@
 'use client'
 
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react'
-import { Search, X, FileText, Users, Wrench, Image as ImageIcon } from 'lucide-react'
+import { Search, X, FileText, Users, Wrench, Image as ImageIcon, BookOpen, Heart } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
+import { blogPosts } from '@/lib/data/blog-posts'
+import { teamMembers, subTeams } from '@/lib/data/team-members'
+import { vehicleSpecs, subsystems } from '@/lib/data/vehicle-specs'
+import { sponsors } from '@/lib/data/sponsors'
 
 interface SearchItem {
   title: string
@@ -12,27 +16,85 @@ interface SearchItem {
   category: string
 }
 
-const searchData: SearchItem[] = [
-  { title: 'Home', description: 'Welcome to Troy SPEAR', href: '/', category: 'Pages' },
-  { title: 'Team', description: 'Meet our team members and sub-teams', href: '/about', category: 'Pages' },
-  { title: 'Vehicle', description: 'Our autonomous underwater vehicle', href: '/vehicle', category: 'Pages' },
-  { title: 'Documentation', description: 'Build logs and design decisions', href: '/documentation', category: 'Pages' },
-  { title: 'Sponsors', description: 'Our sponsors and supporters', href: '/sponsors', category: 'Pages' },
-  { title: 'Gallery', description: 'Photos from competitions and practices', href: '/gallery', category: 'Pages' },
-  { title: 'Contact', description: 'Get in touch', href: '/contact', category: 'Pages' },
-  { title: 'Mechanical Sub-Team', description: 'Hull design, thrusters, mechanical systems', href: '/about#mechanical', category: 'Team' },
-  { title: 'Electrical Sub-Team', description: 'Power systems, sensors, wiring', href: '/about#electrical', category: 'Team' },
-  { title: 'Software Sub-Team', description: 'Computer vision, autonomy, controls', href: '/about#software', category: 'Team' },
-  { title: 'Vehicle Specs', description: 'Dimensions, weight, components', href: '/vehicle#specs', category: 'Vehicle' },
-  { title: '3D Vehicle Viewer', description: 'Interactive 3D model', href: '/vehicle#viewer', category: 'Vehicle' },
-  { title: 'Propulsion System', description: 'Thruster configuration', href: '/vehicle#propulsion', category: 'Vehicle' },
-]
+function buildSearchData(): SearchItem[] {
+  const items: SearchItem[] = [
+    { title: 'Home', description: 'Welcome to Troy SPEAR underwater robotics', href: '/', category: 'Pages' },
+    { title: 'Team', description: 'Meet our team members and sub-teams', href: '/about', category: 'Pages' },
+    { title: 'Vehicle', description: 'Poseidon Mk. II autonomous underwater vehicle', href: '/vehicle', category: 'Pages' },
+    { title: 'Documentation', description: 'Build logs, test results, and design decisions', href: '/documentation', category: 'Pages' },
+    { title: 'Sponsors', description: 'Our sponsors and supporters', href: '/sponsors', category: 'Pages' },
+    { title: 'Gallery', description: 'Photos from competitions, pool tests, and build sessions', href: '/gallery', category: 'Pages' },
+    { title: 'Contact', description: 'Get in touch with Troy SPEAR', href: '/contact', category: 'Pages' },
+    { title: 'Technical Design Reports', description: 'TDRs from past competition years', href: '/vehicle/tdrs', category: 'Pages' },
+    { title: 'Past Vehicles', description: 'Krabby Patty, Aura, Sea++', href: '/vehicle/past/krabby-patty', category: 'Pages' },
+  ]
+
+  for (const post of blogPosts) {
+    items.push({
+      title: post.title,
+      description: post.summary,
+      href: `/documentation/${post.slug}`,
+      category: 'Docs',
+    })
+  }
+
+  for (const member of teamMembers) {
+    items.push({
+      title: member.name,
+      description: `${member.role} — ${member.subTeam} sub-team`,
+      href: '/about',
+      category: 'Team',
+    })
+  }
+
+  for (const team of subTeams) {
+    items.push({
+      title: `${team.name} Sub-Team`,
+      description: team.description,
+      href: '/about',
+      category: 'Team',
+    })
+  }
+
+  for (const sub of subsystems) {
+    items.push({
+      title: sub.name,
+      description: sub.description,
+      href: '/vehicle',
+      category: 'Vehicle',
+    })
+  }
+
+  for (const spec of vehicleSpecs) {
+    items.push({
+      title: spec.label,
+      description: spec.value,
+      href: '/vehicle#specs',
+      category: 'Vehicle',
+    })
+  }
+
+  for (const sponsor of sponsors) {
+    items.push({
+      title: sponsor.name,
+      description: `${sponsor.tier.charAt(0).toUpperCase() + sponsor.tier.slice(1)} sponsor`,
+      href: '/sponsors',
+      category: 'Sponsors',
+    })
+  }
+
+  return items
+}
+
+const searchData = buildSearchData()
 
 const categoryIcons: Record<string, typeof Search> = {
   Pages: FileText,
+  Docs: BookOpen,
   Team: Users,
   Vehicle: Wrench,
   Gallery: ImageIcon,
+  Sponsors: Heart,
 }
 
 export default function SearchModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
@@ -47,10 +109,12 @@ export default function SearchModal({ isOpen, onClose }: { isOpen: boolean; onCl
         setFuseInstance(new Fuse(searchData, {
           keys: [
             { name: 'title', weight: 2 },
-            { name: 'description', weight: 1 },
-            { name: 'category', weight: 1.5 },
+            { name: 'description', weight: 1.5 },
+            { name: 'category', weight: 0.5 },
           ],
-          threshold: 0.3,
+          threshold: 0.4,
+          ignoreLocation: true,
+          minMatchCharLength: 2,
         }))
       })
     }
@@ -59,7 +123,7 @@ export default function SearchModal({ isOpen, onClose }: { isOpen: boolean; onCl
   const results = useMemo(() => {
     if (query.length === 0) return searchData.slice(0, 6)
     if (!fuseInstance) return []
-    return fuseInstance.search(query).slice(0, 8).map((r) => r.item)
+    return fuseInstance.search(query).slice(0, 10).map((r) => r.item)
   }, [query, fuseInstance])
 
   const grouped = useMemo(() => {
@@ -106,17 +170,17 @@ export default function SearchModal({ isOpen, onClose }: { isOpen: boolean; onCl
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.1 }}
-            className="relative w-full max-w-md mx-4 bg-glass backdrop-blur-xl border border-glass-border rounded-xl shadow-2xl overflow-hidden"
+            className="relative w-full max-w-md mx-4 bg-elevated border border-border rounded-xl shadow-2xl overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center gap-3 px-4 border-b border-border-subtle">
-              <Search className="w-4 h-4 text-fg-muted shrink-0" />
+              <Search className="w-4 h-4 text-fg-secondary shrink-0" />
               <input
                 ref={inputRef}
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Search..."
-                className="flex-1 py-3.5 bg-transparent text-fg text-sm placeholder:text-fg-muted outline-none"
+                className="flex-1 py-3.5 bg-transparent text-fg text-sm placeholder:text-fg-secondary outline-none focus:outline-none focus-visible:outline-none"
               />
               <button onClick={onClose} className="text-fg-muted hover:text-fg">
                 <X className="w-3.5 h-3.5" />
@@ -139,9 +203,9 @@ export default function SearchModal({ isOpen, onClose }: { isOpen: boolean; onCl
                         className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-surface/80 transition-colors"
                       >
                         <Icon className="w-3.5 h-3.5 text-fg-muted shrink-0" />
-                        <div>
-                          <div className="text-sm text-fg">{item.title}</div>
-                          <div className="text-[11px] text-fg-muted">{item.description}</div>
+                        <div className="min-w-0">
+                          <div className="text-sm text-fg truncate">{item.title}</div>
+                          <div className="text-[11px] text-fg-muted truncate">{item.description}</div>
                         </div>
                       </Link>
                     )

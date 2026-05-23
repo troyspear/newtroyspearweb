@@ -3,8 +3,8 @@
 import { useState, useEffect } from 'react'
 import Spline from '@splinetool/react-spline'
 
-const LIGHT_SCENE = 'https://prod.spline.design/5Msated5udqyzEIg/scene.splinecode'
-const DARK_SCENE = 'https://prod.spline.design/k4H6sfDMY1-R5B52/scene.splinecode'
+const LIGHT_SCENE = '/models/light-scene.splinecode'
+const DARK_SCENE = '/models/dark-scene.splinecode'
 
 export default function SplineBackground() {
   const [isDark, setIsDark] = useState(false)

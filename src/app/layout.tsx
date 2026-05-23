@@ -19,6 +19,10 @@ export const metadata: Metadata = {
   description:
     'Troy High School\'s underwater robotics team competing in the RoboNation RoboSub competition. Designing, building, and programming autonomous underwater vehicles.',
   keywords: ['RoboSub', 'underwater robotics', 'AUV', 'Troy High School', 'SPEAR', 'RoboNation'],
+  icons: {
+    icon: '/images/logo/troyspear.png',
+    apple: '/images/logo/troyspear.png',
+  },
 }
 
 const themeScript = `(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme:dark)').matches)){document.documentElement.classList.add('dark')}}catch(e){}})()`;

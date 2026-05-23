@@ -22,13 +22,13 @@ const links = [
   {
     href: '/about',
     title: 'Team',
-    description: '12 members across 4 sub-teams',
+    description: '20 members across 3 sub-teams',
   },
 ]
 
 export default function QuickLinks() {
   return (
-    <section id="explore" className="px-5 sm:px-8 py-20 bg-accent-subtle">
+    <section id="explore" className="px-5 sm:px-8 py-20 bg-accent-subtle scroll-mt-24">
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-16 gap-y-10">
           {links.map((link) => (

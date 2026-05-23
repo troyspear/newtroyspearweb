@@ -3,6 +3,7 @@ import HeroSection from '@/components/home/HeroSection'
 import QuickLinks from '@/components/home/QuickLinks'
 import ScrollingBanner from '@/components/home/ScrollingBanner'
 import CompetitionCountdown from '@/components/home/CompetitionCountdown'
+import MissionSection from '@/components/home/MissionSection'
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
         <HeroSection />
       </div>
       <QuickLinks />
+      <MissionSection />
       <CompetitionCountdown />
     </>
   )

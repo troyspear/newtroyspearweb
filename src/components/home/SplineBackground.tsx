@@ -7,8 +7,10 @@ const LIGHT_SCENE = '/models/light-scene.splinecode'
 const DARK_SCENE = '/models/dark-scene.splinecode'
 
 export default function SplineBackground() {
-  const [isDark, setIsDark] = useState(false)
-  const [deferredReady, setDeferredReady] = useState(false)
+  const [isDark, setIsDark] = useState(() => {
+    if (typeof window === 'undefined') return false
+    return document.documentElement.classList.contains('dark')
+  })
 
   useEffect(() => {
     setIsDark(document.documentElement.classList.contains('dark'))
@@ -23,32 +25,11 @@ export default function SplineBackground() {
     return () => observer.disconnect()
   }, [])
 
-  useEffect(() => {
-    if ('requestIdleCallback' in window) {
-      const id = requestIdleCallback(() => setDeferredReady(true), { timeout: 3000 })
-      return () => cancelIdleCallback(id)
-    }
-    const id = setTimeout(() => setDeferredReady(true), 2000)
-    return () => clearTimeout(id)
-  }, [])
-
-  const lightActive = !isDark
-  const darkActive = isDark
-  const showLight = lightActive || deferredReady
-  const showDark = darkActive || deferredReady
+  const scene = isDark ? DARK_SCENE : LIGHT_SCENE
 
   return (
     <div className="absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
-      {showLight && (
-        <div className="absolute inset-0" style={{ visibility: lightActive ? 'visible' : 'hidden' }}>
-          <Spline scene={LIGHT_SCENE} style={{ width: '100%', height: '100%' }} />
-        </div>
-      )}
-      {showDark && (
-        <div className="absolute inset-0" style={{ visibility: darkActive ? 'visible' : 'hidden' }}>
-          <Spline scene={DARK_SCENE} style={{ width: '100%', height: '100%' }} />
-        </div>
-      )}
+      <Spline key={scene} scene={scene} style={{ width: '100%', height: '100%' }} />
     </div>
   )
 }

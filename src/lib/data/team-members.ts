@@ -1,7 +1,7 @@
 export interface TeamMember {
   name: string
   role: string
-  subTeam: 'Mechanical' | 'Electrical' | 'Software' | 'Leadership'
+  subTeam: 'Mechanical' | 'Electrical' | 'Software' | 'Leadership' | 'General'
   image: string
   year: string
 }
@@ -47,6 +47,9 @@ export const teamMembers: TeamMember[] = [
   { name: 'Ryan Zhou', role: 'Member', subTeam: 'Software', image: '/images/team/placeholder-member.jpg', year: '2025-2026' },
 
   // --- 2024-2025 ---
+
+  // Leadership
+  { name: 'Raina Ban', role: 'Commander', subTeam: 'Leadership', image: '/images/team/placeholder-member.jpg', year: '2024-2025' },
 
   // Electrical
   { name: 'Gavin Gibson', role: 'Member', subTeam: 'Electrical', image: '/images/team/placeholder-member.jpg', year: '2024-2025' },
@@ -101,6 +104,20 @@ export const teamMembers: TeamMember[] = [
   { name: 'Kaileo Truong', role: 'Member', subTeam: 'Software', image: '/images/team/placeholder-member.jpg', year: '2023-2024' },
   { name: 'Dylan Xiang', role: 'Member', subTeam: 'Software', image: '/images/team/placeholder-member.jpg', year: '2023-2024' },
   { name: 'Ryan Zhou', role: 'Member', subTeam: 'Software', image: '/images/team/placeholder-member.jpg', year: '2023-2024' },
+
+  // --- 2022-2023 ---
+
+  // General
+  { name: 'Kaleb Lee', role: 'Member', subTeam: 'General', image: '/images/team/placeholder-member.jpg', year: '2022-2023' },
+  { name: 'Thomas Nguyen-Ta', role: 'Member', subTeam: 'General', image: '/images/team/placeholder-member.jpg', year: '2022-2023' },
+  { name: 'Derek Peng', role: 'Member', subTeam: 'General', image: '/images/team/placeholder-member.jpg', year: '2022-2023' },
+  { name: 'Puru Jain', role: 'Member', subTeam: 'General', image: '/images/team/placeholder-member.jpg', year: '2022-2023' },
+  { name: 'Pali Jain', role: 'Member', subTeam: 'General', image: '/images/team/placeholder-member.jpg', year: '2022-2023' },
+  { name: 'Raina Ban', role: 'Member', subTeam: 'General', image: '/images/team/placeholder-member.jpg', year: '2022-2023' },
+  { name: 'Bruce Deng', role: 'Member', subTeam: 'General', image: '/images/team/placeholder-member.jpg', year: '2022-2023' },
+  { name: 'Mateus Noronha', role: 'Member', subTeam: 'General', image: '/images/team/placeholder-member.jpg', year: '2022-2023' },
+  { name: 'Aidan Chen', role: 'Member', subTeam: 'General', image: '/images/team/placeholder-member.jpg', year: '2022-2023' },
+  { name: 'Aaron Li', role: 'Member', subTeam: 'General', image: '/images/team/placeholder-member.jpg', year: '2022-2023' },
 ]
 
 export const subTeams = [

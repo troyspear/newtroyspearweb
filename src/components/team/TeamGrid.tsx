@@ -3,7 +3,7 @@
 import { getMembersByYear, subTeams } from '@/lib/data/team-members'
 import MemberCard from './MemberCard'
 
-const SUB_TEAM_ORDER = ['Leadership', 'Mechanical', 'Electrical', 'Software'] as const
+const SUB_TEAM_ORDER = ['Leadership', 'Mechanical', 'Electrical', 'Software', 'General'] as const
 
 export default function TeamGrid({ year }: { year: string }) {
   const members = getMembersByYear(year)

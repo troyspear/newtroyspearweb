@@ -50,6 +50,7 @@ export const teamMembers: TeamMember[] = [
 
   // Leadership
   { name: 'Raina Ban', role: 'Commander', subTeam: 'Leadership', image: '/images/team/placeholder-member.jpg', year: '2024-2025' },
+  { name: 'Aidan Chen', role: 'Assistant Commander', subTeam: 'Leadership', image: '/images/team/placeholder-member.jpg', year: '2024-2025' },
 
   // Electrical
   { name: 'Gavin Gibson', role: 'Member', subTeam: 'Electrical', image: '/images/team/placeholder-member.jpg', year: '2024-2025' },
@@ -58,7 +59,6 @@ export const teamMembers: TeamMember[] = [
   { name: 'Tim Zhang', role: 'Member', subTeam: 'Electrical', image: '/images/team/placeholder-member.jpg', year: '2024-2025' },
 
   // Mechanical
-  { name: 'Aidan Chen', role: 'Member', subTeam: 'Mechanical', image: '/images/team/placeholder-member.jpg', year: '2024-2025' },
   { name: 'Arjun Reddy', role: 'Member', subTeam: 'Mechanical', image: '/images/team/placeholder-member.jpg', year: '2024-2025' },
   { name: 'Humza Shahzad', role: 'Member', subTeam: 'Mechanical', image: '/images/team/placeholder-member.jpg', year: '2024-2025' },
   { name: 'Wesley Shen', role: 'Member', subTeam: 'Mechanical', image: '/images/team/placeholder-member.jpg', year: '2024-2025' },
@@ -81,10 +81,15 @@ export const teamMembers: TeamMember[] = [
 
   // --- 2023-2024 ---
 
+  // Leadership
+  { name: 'Kaleb Lee', role: 'Commander', subTeam: 'Leadership', image: '/images/team/placeholder-member.jpg', year: '2023-2024' },
+  { name: 'Derek Peng', role: 'Sub-Commander', subTeam: 'Leadership', image: '/images/team/placeholder-member.jpg', year: '2023-2024' },
+  { name: 'Raina Ban', role: 'Sub-Commander', subTeam: 'Leadership', image: '/images/team/placeholder-member.jpg', year: '2023-2024' },
+  { name: 'Bruce Deng', role: 'Sub-Commander', subTeam: 'Leadership', image: '/images/team/placeholder-member.jpg', year: '2023-2024' },
+
   // Mechanical
   { name: 'Aidan Chen', role: 'Member', subTeam: 'Mechanical', image: '/images/team/placeholder-member.jpg', year: '2023-2024' },
   { name: 'Gavin Gibson', role: 'Member', subTeam: 'Mechanical', image: '/images/team/placeholder-member.jpg', year: '2023-2024' },
-  { name: 'Kaleb Lee', role: 'Member', subTeam: 'Mechanical', image: '/images/team/placeholder-member.jpg', year: '2023-2024' },
   { name: 'Yongjing Li', role: 'Member', subTeam: 'Mechanical', image: '/images/team/placeholder-member.jpg', year: '2023-2024' },
   { name: 'Elvina Liou', role: 'Member', subTeam: 'Mechanical', image: '/images/team/placeholder-member.jpg', year: '2023-2024' },
   { name: 'Yun Long', role: 'Member', subTeam: 'Mechanical', image: '/images/team/placeholder-member.jpg', year: '2023-2024' },
@@ -94,11 +99,8 @@ export const teamMembers: TeamMember[] = [
   { name: 'Daniel Tran', role: 'Member', subTeam: 'Mechanical', image: '/images/team/placeholder-member.jpg', year: '2023-2024' },
 
   // Software
-  { name: 'Raina Ban', role: 'Member', subTeam: 'Software', image: '/images/team/placeholder-member.jpg', year: '2023-2024' },
-  { name: 'Bruce Deng', role: 'Member', subTeam: 'Software', image: '/images/team/placeholder-member.jpg', year: '2023-2024' },
   { name: 'Joshua Kim', role: 'Member', subTeam: 'Software', image: '/images/team/placeholder-member.jpg', year: '2023-2024' },
   { name: 'Mateus Noronha', role: 'Member', subTeam: 'Software', image: '/images/team/placeholder-member.jpg', year: '2023-2024' },
-  { name: 'Derek Peng', role: 'Member', subTeam: 'Software', image: '/images/team/placeholder-member.jpg', year: '2023-2024' },
   { name: 'Krishna Sivakumar', role: 'Member', subTeam: 'Software', image: '/images/team/placeholder-member.jpg', year: '2023-2024' },
   { name: 'Landis Tien', role: 'Member', subTeam: 'Software', image: '/images/team/placeholder-member.jpg', year: '2023-2024' },
   { name: 'Kaileo Truong', role: 'Member', subTeam: 'Software', image: '/images/team/placeholder-member.jpg', year: '2023-2024' },

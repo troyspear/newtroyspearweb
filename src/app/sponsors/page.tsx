@@ -81,7 +81,7 @@ export default function SponsorsPage() {
               Why sponsor Troy SPEAR?
             </h2>
             <p className="mt-4 text-sm text-fg-secondary leading-relaxed max-w-2xl">
-              Your sponsorship directly funds the materials, sensors, and travel that make it possible for high school students to design, build, and program autonomous underwater vehicles — gaining hands-on engineering experience before they even reach college.
+              Your sponsorship directly funds the materials, sensors, and travel that make it possible for high school students to design, build, and program autonomous underwater vehicles, gaining hands-on engineering experience before they even reach college.
             </p>
 
             <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-4">
@@ -116,7 +116,7 @@ export default function SponsorsPage() {
                 Become a partner
               </h3>
               <p className="mt-3 text-sm text-fg-muted max-w-md leading-relaxed">
-                Join the organizations supporting the next generation of engineers. Every contribution — whether financial, in-kind, or mentorship — has a direct impact on what our students can achieve.
+                Join the organizations supporting the next generation of engineers. Every contribution, whether financial, in-kind, or mentorship, has a direct impact on what our students can achieve.
               </p>
             </div>
             <div className="flex items-center gap-4 mt-6">

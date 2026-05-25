@@ -10,7 +10,7 @@ export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
   title: 'Vehicle',
-  description: 'Explore our autonomous underwater vehicle — interactive 3D viewer, specs, and subsystem documentation.',
+  description: 'Explore our autonomous underwater vehicle: interactive 3D viewer, specs, and subsystem documentation.',
 }
 
 export default function VehiclePage() {
@@ -43,7 +43,7 @@ export default function VehiclePage() {
           <div className="relative aspect-video rounded-2xl overflow-hidden bg-surface border border-border-subtle">
             {/* <iframe
               src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
-              title="Poseidon Mk. II — Vehicle Overview"
+              title="Poseidon Mk. II: Vehicle Overview"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
               className="absolute inset-0 w-full h-full"

@@ -10,7 +10,7 @@ export interface GalleryItem {
 }
 
 export const galleryItems: GalleryItem[] = [
-  // 2024–25
+  // 2024-25
   { id: '1', src: '/images/gallery/24-25/24-25_cmdr.jpg', alt: 'RoboNation commander\'s briefing at RoboSub 2025', caption: 'Commander\'s briefing at RoboSub 2025', date: 'August 2025', category: 'competition', year: 2025, orientation: 'landscape' },
   { id: '22', src: '/images/gallery/24-25/24-25_cmdr1.jpg', alt: 'Wide view of commander\'s briefing ballroom at RoboSub 2025', caption: 'Commander\'s briefing at RoboSub 2025', date: 'August 2025', category: 'competition', year: 2025, orientation: 'landscape' },
   { id: '23', src: '/images/gallery/24-25/24-25_cmdr2.jpg', alt: 'Rear view of commander\'s briefing at RoboSub 2025', caption: 'Commander\'s briefing at RoboSub 2025', date: 'August 2025', category: 'competition', year: 2025, orientation: 'landscape' },
@@ -22,7 +22,7 @@ export const galleryItems: GalleryItem[] = [
   { id: '29', src: '/images/gallery/24-25/24-25_comp5.jpg', alt: 'RoboNation banner at RoboSub 2025 competition grounds', caption: 'RoboSub 2025 competition grounds', date: 'August 2025', category: 'competition', year: 2025, orientation: 'portrait' },
   { id: '30', src: '/images/gallery/24-25/24-25_pool.jpg', alt: 'Gavin testing AUV underwater in a pool', caption: 'Gavin pool testing the AUV', date: '2025', category: 'practice', year: 2025, orientation: 'landscape' },
 
-  // 2023–24
+  // 2023-24
   { id: '2', src: '/images/gallery/23-24/23-24_comp.jpg', alt: 'Team presenting AUV to Navy judges', caption: 'Presenting Krabby Patty to Navy judges at RoboSub 2024', date: 'August 2024', category: 'competition', year: 2024, orientation: 'landscape' },
   { id: '3', src: '/images/gallery/23-24/23-24_comp1.jpg', alt: 'Team speaking with Navy officer at judging', caption: 'Technical interview with judges at RoboSub 2024', date: 'August 2024', category: 'competition', year: 2024, orientation: 'landscape' },
   { id: '4', src: '/images/gallery/23-24/23-24_pool.jpg', alt: 'Watching AUV during competition pool run', caption: 'Watching Krabby Patty during a competition run', date: 'August 2024', category: 'competition', year: 2024, orientation: 'portrait' },
@@ -37,7 +37,7 @@ export const galleryItems: GalleryItem[] = [
   { id: '13', src: '/images/gallery/23-24/2023-4_test.jpg', alt: 'AUV floating in a pool during testing', caption: 'Pool testing Krabby Patty', date: '2024', category: 'practice', year: 2024, orientation: 'portrait' },
   { id: '14', src: '/images/gallery/23-24/2023-4_team.jpg', alt: 'Team group photo indoors', caption: 'Team hangout during build season', date: '2024', category: 'team', year: 2024, orientation: 'landscape' },
 
-  // 2022–23
+  // 2022-23
   { id: '15', src: '/images/gallery/22-23/22-23_comp.jpg', alt: 'Team working on AUV at competition tent', caption: 'Prepping Sea++ at the competition tent', date: 'August 2023', category: 'competition', year: 2023, orientation: 'landscape' },
   { id: '16', src: '/images/gallery/22-23/22-23_comp1.jpg', alt: 'Team members around AUV at competition', caption: 'Final checks on Sea++ at RoboSub 2023', date: 'August 2023', category: 'competition', year: 2023, orientation: 'landscape' },
   { id: '17', src: '/images/gallery/22-23/22-23_comp2.jpg', alt: 'Team gathered around vehicle at competition tent', caption: 'Working on Sea++ between runs', date: 'August 2023', category: 'competition', year: 2023, orientation: 'landscape' },

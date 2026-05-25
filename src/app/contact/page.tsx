@@ -19,7 +19,7 @@ function GithubIcon({ className }: { className?: string }) {
 
 export const metadata: Metadata = {
   title: 'Contact',
-  description: 'Get in touch with Troy SPEAR — sponsorship inquiries, questions, or interest in joining the team.',
+  description: 'Get in touch with Troy SPEAR for sponsorship inquiries, questions, or interest in joining the team.',
 }
 
 export default function ContactPage() {
@@ -31,7 +31,7 @@ export default function ContactPage() {
             Contact
           </h1>
           <p className="mt-3 text-sm text-fg-muted max-w-lg">
-            Connect with us — whether it&apos;s a sponsorship inquiry, a question about our work, or interest in joining the team.
+            Connect with us, whether it&apos;s a sponsorship inquiry, a question about our work, or interest in joining the team.
           </p>
 
           <div className="mt-14 grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -65,7 +65,7 @@ export default function ContactPage() {
                   <span className="text-xs font-medium text-fg-muted uppercase tracking-wide">Location</span>
                 </div>
                 <p className="text-sm text-fg leading-relaxed">
-                  Troy High School NJROTC — Room 401<br />
+                  Troy High School NJROTC, Room 401<br />
                   2200 E Dorothy Ln, Fullerton, CA 92831
                 </p>
               </div>

@@ -5,7 +5,7 @@ import { getTeamYears, getMembersByYear } from '@/lib/data/team-members'
 
 export const metadata: Metadata = {
   title: 'Team',
-  description: 'Meet the Troy SPEAR team — the students behind our autonomous underwater vehicle.',
+  description: 'Meet the Troy SPEAR team, the students behind our autonomous underwater vehicle.',
 }
 
 export default function AboutPage() {
@@ -21,7 +21,7 @@ export default function AboutPage() {
           <div className="mt-6 max-w-xl">
             <p className="text-sm text-fg-secondary leading-relaxed">
               Troy SPEAR brings together students from mechanical, electrical,
-              and software backgrounds — all building an autonomous
+              and software backgrounds, all building an autonomous
               underwater vehicle for RoboNation RoboSub.
             </p>
           </div>

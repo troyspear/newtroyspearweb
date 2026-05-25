@@ -8,13 +8,13 @@ export interface Update {
 export const updates: Update[] = [
   {
     id: '1',
-    title: 'Hull Design v2 Complete — 30% drag reduction',
+    title: 'Hull Design v2 Complete: 30% drag reduction',
     date: '2025-09-15',
     slug: 'hull-design-v2',
   },
   {
     id: '2',
-    title: 'First Pool Test Success — validated at 3m depth',
+    title: 'First Pool Test Success: validated at 3m depth',
     date: '2025-08-20',
     slug: 'pool-test-march-2025',
   },
@@ -38,13 +38,13 @@ export const updates: Update[] = [
   },
   {
     id: '6',
-    title: 'Pool Test #2 — Autonomous gate navigation, 4 hrs water time',
+    title: 'Pool Test #2: Autonomous gate navigation, 4 hrs water time',
     date: '2025-05-10',
     slug: 'pool-test-may-2025',
   },
   {
     id: '7',
-    title: 'Simulation Validation — Gazebo vs. real-world comparison',
+    title: 'Simulation Validation: Gazebo vs. real-world comparison',
     date: '2025-04-18',
     slug: 'simulation-validation',
   },

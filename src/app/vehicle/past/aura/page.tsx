@@ -3,8 +3,8 @@ import Link from 'next/link'
 import { ArrowLeft, FileText } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Aura — Past Vehicle',
-  description: 'The Aura AUV, designed for RoboSub 2023–2024.',
+  title: 'Aura | Past Vehicle',
+  description: 'The Aura AUV, designed for RoboSub 2023-2024.',
 }
 
 export default function AuraPage() {
@@ -21,7 +21,7 @@ export default function AuraPage() {
           </Link>
 
           <span className="inline-block text-[10px] font-semibold text-accent bg-accent-subtle px-2.5 py-1 rounded-full uppercase tracking-wider">
-            RoboSub 2023–2024
+            RoboSub 2023-2024
           </span>
           <h1 className="font-display text-3xl sm:text-4xl font-light text-fg tracking-tight mt-4">
             Aura
@@ -42,7 +42,7 @@ export default function AuraPage() {
                 className="inline-flex items-center gap-1.5 text-xs font-semibold text-accent hover:opacity-70 transition-opacity"
               >
                 <FileText className="w-3.5 h-3.5" />
-                Read TDR 2023–2024 (PDF)
+                Read TDR 2023-2024 (PDF)
               </a>
             </div>
           </div>

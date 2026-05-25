@@ -133,6 +133,6 @@ export const subTeams = [
   },
   {
     name: 'Software',
-    description: 'Builds the autonomy stack — computer vision, path planning, PID controllers, and ROS integration for mission execution.',
+    description: 'Builds the autonomy stack: computer vision, path planning, PID controllers, and ROS integration for mission execution.',
   },
 ]

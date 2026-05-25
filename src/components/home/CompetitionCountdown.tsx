@@ -39,7 +39,7 @@ export default function CompetitionCountdown() {
             return (
               <div key={label} className="flex flex-col items-center">
                 <span className="font-display text-3xl sm:text-5xl font-light text-fg tabular-nums min-w-[2ch] text-center">
-                  {timeLeft ? String(timeLeft[key]).padStart(2, '0') : '—'}
+                  {timeLeft ? String(timeLeft[key]).padStart(2, '0') : '--'}
                 </span>
                 <span className="mt-1 text-[10px] sm:text-xs text-fg-muted uppercase tracking-wider">
                   {label}

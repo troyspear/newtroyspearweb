@@ -3,8 +3,8 @@ import Link from 'next/link'
 import { ArrowLeft, FileText } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Krabby Patty — Past Vehicle',
-  description: 'The Krabby Patty AUV, designed for RoboSub 2024–2025.',
+  title: 'Krabby Patty | Past Vehicle',
+  description: 'The Krabby Patty AUV, designed for RoboSub 2024-2025.',
 }
 
 export default function KrabbyPattyPage() {
@@ -21,7 +21,7 @@ export default function KrabbyPattyPage() {
           </Link>
 
           <span className="inline-block text-[10px] font-semibold text-accent bg-accent-subtle px-2.5 py-1 rounded-full uppercase tracking-wider">
-            RoboSub 2024–2025
+            RoboSub 2024-2025
           </span>
           <h1 className="font-display text-3xl sm:text-4xl font-light text-fg tracking-tight mt-4">
             Krabby Patty
@@ -42,7 +42,7 @@ export default function KrabbyPattyPage() {
                 className="inline-flex items-center gap-1.5 text-xs font-semibold text-accent hover:opacity-70 transition-opacity"
               >
                 <FileText className="w-3.5 h-3.5" />
-                Read TDR 2024–2025 (PDF)
+                Read TDR 2024-2025 (PDF)
               </a>
             </div>
           </div>

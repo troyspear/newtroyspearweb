@@ -41,7 +41,7 @@ function buildSearchData(): SearchItem[] {
   for (const member of teamMembers) {
     items.push({
       title: member.name,
-      description: `${member.role} — ${member.subTeam} sub-team`,
+      description: `${member.role}, ${member.subTeam} sub-team`,
       href: '/about',
       category: 'Team',
     })

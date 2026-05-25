@@ -9,7 +9,7 @@ import { FileText, Beaker, CheckCircle, AlertCircle, Clock, ChevronLeft, Chevron
 
 const tdrs = [
   {
-    year: '2025–2026',
+    year: '2025-2026',
     vehicle: 'Poseidon Mk. II',
     vehicleSlug: '/vehicle',
     description: '',
@@ -17,7 +17,7 @@ const tdrs = [
     upcoming: true,
   },
   {
-    year: '2024–2025',
+    year: '2024-2025',
     vehicle: 'Krabby Patty',
     vehicleSlug: '/vehicle/past/krabby-patty',
     description: 'Octagonal aluminum frame with custom CNC-milled components, dual ZED 2i stereo cameras, NVIDIA Jetson Orin Nano, double-jointed claw, and YOLOv8 with 3D spatial localization.',
@@ -25,7 +25,7 @@ const tdrs = [
     upcoming: false,
   },
   {
-    year: '2023–2024',
+    year: '2023-2024',
     vehicle: 'Aura',
     vehicleSlug: '/vehicle/past/aura',
     description: 'Newly built AUV integrating YOLOv8 vision, DVL for underwater positioning, upgraded claw and torpedo systems, and behavior tree mission planning on a BlueROV2 frame.',
@@ -33,7 +33,7 @@ const tdrs = [
     upcoming: false,
   },
   {
-    year: '2022–2023',
+    year: '2022-2023',
     vehicle: 'Sea++',
     vehicleSlug: '/vehicle/past/sea-plus-plus',
     description: 'Our inaugural AUV built by 10 students using a BlueROV2 R2 frame, YOLO v4 object detection, ROS with PID control, and an NVIDIA Jetson Nano.',
@@ -45,7 +45,7 @@ const tdrs = [
 const testSummaries = [
   {
     date: 'May 2025',
-    title: 'Pool Test #2 — Autonomous Navigation',
+    title: 'Pool Test #2: Autonomous Navigation',
     waterTime: '4 hours',
     objectives: ['Tune depth hold PID', 'First autonomous gate navigation', 'Test vision pipeline underwater', 'Measure battery runtime'],
     results: { passed: 4, partial: 1, failed: 0 },
@@ -61,7 +61,7 @@ const testSummaries = [
   },
   {
     date: 'Mar 2025',
-    title: 'Pool Test #1 — Initial Water Test',
+    title: 'Pool Test #1: Initial Water Test',
     waterTime: '3 hours',
     objectives: ['Validate waterproof integrity', 'Test thruster control', 'Achieve depth hold at 3m', 'Check sensor readings'],
     results: { passed: 3, partial: 1, failed: 0 },

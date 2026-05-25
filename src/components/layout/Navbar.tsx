@@ -57,6 +57,7 @@ export default function Navbar({ onSearchOpen }: { onSearchOpen: () => void }) {
     const next = !dark
     setDark(next)
     document.documentElement.classList.toggle('dark', next)
+    document.documentElement.style.colorScheme = next ? 'dark' : 'light'
     localStorage.setItem('theme', next ? 'dark' : 'light')
   }
 

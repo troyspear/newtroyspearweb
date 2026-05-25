@@ -48,41 +48,45 @@ export default function MissionSection() {
 
           <div className="grid grid-cols-2 gap-3">
             <div className="space-y-3">
-              <div className="relative aspect-[4/5] rounded-lg overflow-hidden">
+              <div className="aspect-[4/5] rounded-lg overflow-hidden">
                 <Image
                   src="/images/gallery/24-25/24-25_comp1.jpg"
                   alt="Team working at competition"
-                  fill
-                  className="object-cover"
+                  width={1200}
+                  height={800}
+                  className="h-full w-full object-cover"
                   sizes="(max-width: 1024px) 50vw, 25vw"
                 />
               </div>
-              <div className="relative aspect-[4/3] rounded-lg overflow-hidden">
+              <div className="aspect-[4/3] rounded-lg overflow-hidden">
                 <Image
                   src="/images/gallery/24-25/24-25_pool.jpg"
                   alt="Pool testing"
-                  fill
-                  className="object-cover"
+                  width={1200}
+                  height={900}
+                  className="h-full w-full object-cover"
                   sizes="(max-width: 1024px) 50vw, 25vw"
                 />
               </div>
             </div>
             <div className="space-y-3 pt-6">
-              <div className="relative aspect-[4/3] rounded-lg overflow-hidden">
+              <div className="aspect-[4/3] rounded-lg overflow-hidden">
                 <Image
                   src="/images/gallery/24-25/24-25_comp2.jpg"
                   alt="Team at competition"
-                  fill
-                  className="object-cover"
+                  width={1200}
+                  height={800}
+                  className="h-full w-full object-cover"
                   sizes="(max-width: 1024px) 50vw, 25vw"
                 />
               </div>
-              <div className="relative aspect-[4/5] rounded-lg overflow-hidden">
+              <div className="aspect-[4/5] rounded-lg overflow-hidden">
                 <Image
                   src="/images/gallery/23-24/2023-4_build.png"
                   alt="Building the vehicle"
-                  fill
-                  className="object-cover"
+                  width={960}
+                  height={717}
+                  className="h-full w-full object-cover"
                   sizes="(max-width: 1024px) 50vw, 25vw"
                 />
               </div>

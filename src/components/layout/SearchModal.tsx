@@ -193,11 +193,11 @@ export default function SearchModal({ isOpen, onClose }: { isOpen: boolean; onCl
                   <div className="px-3 py-1.5 text-[11px] font-medium text-fg-muted uppercase tracking-wider">
                     {category}
                   </div>
-                  {items.map((item) => {
+                  {items.map((item, i) => {
                     const Icon = categoryIcons[item.category] || FileText
                     return (
                       <Link
-                        key={item.href + item.title}
+                        key={`${item.href}|${item.title}|${i}`}
                         href={item.href}
                         onClick={onClose}
                         className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-surface/80 transition-colors"

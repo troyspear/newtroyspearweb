@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useLayoutEffect, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Search, Menu, X, Moon, Sun, ChevronDown } from 'lucide-react'
@@ -30,12 +30,8 @@ export default function Navbar({ onSearchOpen }: { onSearchOpen: () => void }) {
   const dropdownRef = useRef<HTMLDivElement>(null)
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
-  useLayoutEffect(() => {
-    const stored = localStorage.getItem('theme')
-    const prefersDark = stored === 'dark' || (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches)
-    document.documentElement.classList.toggle('dark', prefersDark)
-    document.documentElement.style.colorScheme = prefersDark ? 'dark' : 'light'
-    setDark(prefersDark)
+  useEffect(() => {
+    setDark(document.documentElement.classList.contains('dark'))
   }, [])
 
   useEffect(() => {
@@ -76,6 +72,7 @@ export default function Navbar({ onSearchOpen }: { onSearchOpen: () => void }) {
                 alt="Troy SPEAR"
                 width={36}
                 height={36}
+                priority
                 className="w-9 h-9"
               />
               <span className="font-display font-semibold text-[13.5px] tracking-wide text-fg uppercase">

@@ -4,6 +4,7 @@ export interface TeamMember {
   subTeam: 'Mechanical' | 'Electrical' | 'Software' | 'Leadership' | 'General'
   image: string
   year: string
+  grade?: number
 }
 
 export function getTeamYears(): string[] {
@@ -17,34 +18,34 @@ export function getMembersByYear(year: string): TeamMember[] {
 
 export const teamMembers: TeamMember[] = [
   // Leadership
-  { name: 'Gavin Gibson', role: 'Co-Commander', subTeam: 'Leadership', image: '/images/team/placeholder-member.jpg', year: '2025-2026' },
-  { name: 'Krishna Sivakumar', role: 'Co-Commander', subTeam: 'Leadership', image: '/images/team/placeholder-member.jpg', year: '2025-2026' },
-  { name: 'Humza Shahzad', role: 'Mechanical Commander', subTeam: 'Leadership', image: '/images/team/placeholder-member.jpg', year: '2025-2026' },
-  { name: 'Matthew Yen', role: 'Software Commander', subTeam: 'Leadership', image: '/images/team/placeholder-member.jpg', year: '2025-2026' },
+  { name: 'Gavin Gibson', role: 'Co-Commander', subTeam: 'Leadership', image: '/images/team/placeholder-member.jpg', year: '2025-2026', grade: 11 },
+  { name: 'Krishna Sivakumar', role: 'Co-Commander', subTeam: 'Leadership', image: '/images/team/placeholder-member.jpg', year: '2025-2026', grade: 11 },
+  { name: 'Humza Shahzad', role: 'Mechanical Commander', subTeam: 'Leadership', image: '/images/team/placeholder-member.jpg', year: '2025-2026', grade: 11 },
+  { name: 'Matthew Yen', role: 'Software Commander', subTeam: 'Leadership', image: '/images/team/placeholder-member.jpg', year: '2025-2026', grade: 11 },
 
   // Electrical
-  { name: 'Kathy He', role: 'Member', subTeam: 'Electrical', image: '/images/team/placeholder-member.jpg', year: '2025-2026' },
-  { name: 'Zion Qu', role: 'Member', subTeam: 'Electrical', image: '/images/team/placeholder-member.jpg', year: '2025-2026' },
-  { name: 'Avijeet Singh', role: 'Member', subTeam: 'Electrical', image: '/images/team/placeholder-member.jpg', year: '2025-2026' },
+  { name: 'Kathy He', role: 'Member', subTeam: 'Electrical', image: '/images/team/placeholder-member.jpg', year: '2025-2026', grade: 10 },
+  { name: 'Zion Qu', role: 'Member', subTeam: 'Electrical', image: '/images/team/placeholder-member.jpg', year: '2025-2026', grade: 10 },
+  { name: 'Avijeet Singh', role: 'Member', subTeam: 'Electrical', image: '/images/team/placeholder-member.jpg', year: '2025-2026', grade: 11 },
 
   // Mechanical
-  { name: 'Sai Arasala', role: 'Member', subTeam: 'Mechanical', image: '/images/team/placeholder-member.jpg', year: '2025-2026' },
-  { name: 'Alex Kwon', role: 'Member', subTeam: 'Mechanical', image: '/images/team/placeholder-member.jpg', year: '2025-2026' },
-  { name: 'Jane Liu', role: 'Member', subTeam: 'Mechanical', image: '/images/team/placeholder-member.jpg', year: '2025-2026' },
-  { name: 'Alessandra Noronha', role: 'Member', subTeam: 'Mechanical', image: '/images/team/placeholder-member.jpg', year: '2025-2026' },
-  { name: 'Ansh Sanghvi', role: 'Member', subTeam: 'Mechanical', image: '/images/team/placeholder-member.jpg', year: '2025-2026' },
-  { name: 'Wesley Shen', role: 'Member', subTeam: 'Mechanical', image: '/images/team/placeholder-member.jpg', year: '2025-2026' },
-  { name: 'Kaileo Truong', role: 'Member', subTeam: 'Mechanical', image: '/images/team/placeholder-member.jpg', year: '2025-2026' },
-  { name: 'Max Valesquez', role: 'Member', subTeam: 'Mechanical', image: '/images/team/placeholder-member.jpg', year: '2025-2026' },
-  { name: 'Jason Xu', role: 'Member', subTeam: 'Mechanical', image: '/images/team/placeholder-member.jpg', year: '2025-2026' },
+  { name: 'Sai Arasala', role: 'Member', subTeam: 'Mechanical', image: '/images/team/placeholder-member.jpg', year: '2025-2026', grade: 11 },
+  { name: 'Alex Kwon', role: 'Member', subTeam: 'Mechanical', image: '/images/team/placeholder-member.jpg', year: '2025-2026', grade: 9 },
+  { name: 'Jane Liu', role: 'Member', subTeam: 'Mechanical', image: '/images/team/placeholder-member.jpg', year: '2025-2026', grade: 9 },
+  { name: 'Alessandra Noronha', role: 'Member', subTeam: 'Mechanical', image: '/images/team/placeholder-member.jpg', year: '2025-2026', grade: 10 },
+  { name: 'Ansh Sanghvi', role: 'Member', subTeam: 'Mechanical', image: '/images/team/placeholder-member.jpg', year: '2025-2026', grade: 9 },
+  { name: 'Wesley Shen', role: 'Member', subTeam: 'Mechanical', image: '/images/team/placeholder-member.jpg', year: '2025-2026', grade: 10 },
+  { name: 'Kaileo Truong', role: 'Member', subTeam: 'Mechanical', image: '/images/team/placeholder-member.jpg', year: '2025-2026', grade: 11 },
+  { name: 'Max Valesquez', role: 'Member', subTeam: 'Mechanical', image: '/images/team/placeholder-member.jpg', year: '2025-2026', grade: 9 },
+  { name: 'Jason Xu', role: 'Member', subTeam: 'Mechanical', image: '/images/team/placeholder-member.jpg', year: '2025-2026', grade: 9 },
 
   // Software
-  { name: 'Ryan Jian', role: 'Member', subTeam: 'Software', image: '/images/team/placeholder-member.jpg', year: '2025-2026' },
-  { name: 'Brooke Li', role: 'Member', subTeam: 'Software', image: '/images/team/placeholder-member.jpg', year: '2025-2026' },
-  { name: 'Rener Li', role: 'Member', subTeam: 'Software', image: '/images/team/placeholder-member.jpg', year: '2025-2026' },
-  { name: 'Cristian Liu', role: 'Member', subTeam: 'Software', image: '/images/team/placeholder-member.jpg', year: '2025-2026' },
-  { name: 'Shreyas Rawat', role: 'Member', subTeam: 'Software', image: '/images/team/placeholder-member.jpg', year: '2025-2026' },
-  { name: 'Ryan Zhou', role: 'Member', subTeam: 'Software', image: '/images/team/placeholder-member.jpg', year: '2025-2026' },
+  { name: 'Ryan Jian', role: 'Member', subTeam: 'Software', image: '/images/team/placeholder-member.jpg', year: '2025-2026', grade: 10 },
+  { name: 'Brooke Li', role: 'Member', subTeam: 'Software', image: '/images/team/placeholder-member.jpg', year: '2025-2026', grade: 11 },
+  { name: 'Rener Li', role: 'Member', subTeam: 'Software', image: '/images/team/placeholder-member.jpg', year: '2025-2026', grade: 10 },
+  { name: 'Cristian Liu', role: 'Member', subTeam: 'Software', image: '/images/team/placeholder-member.jpg', year: '2025-2026', grade: 10 },
+  { name: 'Shreyas Rawat', role: 'Member', subTeam: 'Software', image: '/images/team/placeholder-member.jpg', year: '2025-2026', grade: 9 },
+  { name: 'Ryan Zhou', role: 'Member', subTeam: 'Software', image: '/images/team/placeholder-member.jpg', year: '2025-2026', grade: 11 },
 
   // --- 2024-2025 ---
 

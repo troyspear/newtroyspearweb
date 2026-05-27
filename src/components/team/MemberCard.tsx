@@ -4,6 +4,8 @@ import type { TeamMember } from '@/lib/data/team-members'
 
 export default function MemberCard({ member }: { member: TeamMember }) {
   const hasImage = member.image && !member.image.includes('placeholder')
+  const displayRole = member.role === 'Member' ? `${member.subTeam} Member` : member.role
+  const classOf = member.grade ? `, CO ${2026 + (12 - member.grade)}` : ''
 
   return (
     <div className="flex items-center gap-3">
@@ -22,7 +24,7 @@ export default function MemberCard({ member }: { member: TeamMember }) {
       </div>
       <div>
         <p className="text-sm text-fg">{member.name}</p>
-        <p className="text-xs text-fg-muted mt-0.5">{member.role}</p>
+        <p className="text-xs text-fg-muted mt-0.5">{displayRole}{classOf}</p>
       </div>
     </div>
   )

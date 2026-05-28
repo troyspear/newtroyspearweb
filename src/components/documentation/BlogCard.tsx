@@ -21,7 +21,7 @@ export default function BlogCard({ post }: { post: BlogPost }) {
         </p>
       </div>
       <span className="text-[11px] text-fg-muted shrink-0">
-        {new Date(post.date).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
+        {new Date(post.date + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
       </span>
     </Link>
   )

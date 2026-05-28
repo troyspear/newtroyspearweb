@@ -18,18 +18,16 @@ export interface BlogMedia {
 
 export const blogPosts: BlogPost[] = [
   {
-    slug: 'hull-design-v2',
-    title: 'Hull Design v2: Lessons from Last Year',
-    date: '2025-09-15',
-    category: 'design',
-    summary: 'A complete redesign of our hull based on hydrodynamic analysis and competition feedback. We reduced drag by 30% while improving internal component access.',
+    slug: 'camera-latency-tensorrt',
+    title: 'Fixing Camera Latency: Migrating from ONNX to TensorRT',
+    date: '2026-05-23',
+    category: 'build',
+    summary: 'Tackling the camera lag that dropped us from a target of 720p @ 60 fps down to 0.5 fps, and why we moved our model runtime from ONNX to TensorRT on the Jetson Orin Nano.',
     thumbnail: '/images/vehicle/placeholder-sub-1.jpg',
     media: [
-      { type: 'image', src: '', alt: 'CFD simulation results comparing hull v1 and v2 drag profiles', caption: 'CFD drag comparison, v1 (left) vs v2 (right)' },
-      { type: 'image', src: '', alt: 'CAD render of the new torpedo hull with removable end caps', caption: 'Hull v2 CAD model with quick-release end caps' },
-      { type: 'image', src: '', alt: 'Manufactured hull assembled with sensor mounts', caption: 'Final hull assembly with modular sensor mounts' },
+      { type: 'image', src: '', alt: 'Camera feed and inference latency comparison before and after TensorRT migration', caption: 'Camera + inference latency, ONNX vs. TensorRT (placeholder)' },
     ],
-    content: `## Overview\n\nAfter our 2024 competition run, we identified several areas where our hull design could improve. The primary concerns were:\n\n- Excessive drag at higher speeds\n- Difficulty accessing internal electronics for maintenance\n- Insufficient space for additional sensors\n\n## Design Process\n\nWe used CFD simulations to test multiple hull profiles before settling on a streamlined torpedo shape with removable end caps. The new design features:\n\n- **30% drag reduction** compared to v1\n- **Quick-release end caps** for rapid electronics access\n- **Modular sensor mounts** along the hull exterior\n\n## Testing Results\n\nPool tests confirmed improved straight-line speed and maneuverability. The vehicle now achieves stable operation at depths up to 5 meters.\n\n## Next Steps\n\nWe're finalizing the mounting system for our new camera array and will begin integration testing next week.`,
+    content: `## Overview\n\nToday, we worked on fixing the high latency issue of the camera and implementing localization. The camera is supposed to run at 720p @ 60 fps, but in practice, it was running much slower, at around 0.5 fps.\n\n## Diagnosing the Lag\n\nTo diagnose the problem causing the lag, we went through two main components:\n\n- The runtime of the model\n- The model itself\n\n## Switching from ONNX to TensorRT\n\nThe previous runtime for the model was ONNX, which was chosen because it provided a standardized file format we could run anywhere. We had used ONNX in previous years because of its ease of use, accessibility, and its compatibility with our software stack.\n\nHowever, due to the limited compute power the Jetson Orin Nano has, our main processing unit, we decided to switch over to TensorRT. TensorRT is a runtime, like ONNX, but optimized for inference speed and throughput, which is ideal for our situation.`,
   },
   {
     slug: 'pool-test-march-2025',

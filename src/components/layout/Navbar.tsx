@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useRef, useSyncExternalStore } from 'react'
+import { useState, useEffect, useLayoutEffect, useRef, useSyncExternalStore } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Search, Menu, X, Moon, Sun, ChevronDown } from 'lucide-react'
@@ -43,6 +43,13 @@ export default function Navbar({ onSearchOpen }: { onSearchOpen: () => void }) {
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  useLayoutEffect(() => {
+    const stored = localStorage.getItem('theme')
+    const prefersDark = stored === 'dark' || (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches)
+    document.documentElement.classList.toggle('dark', prefersDark)
+    document.documentElement.style.colorScheme = prefersDark ? 'dark' : 'light'
+  }, [])
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {

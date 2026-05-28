@@ -126,29 +126,29 @@ export default function Navbar({ onSearchOpen }: { onSearchOpen: () => void }) {
               )}
             </div>
 
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 sm:gap-3">
               {dark !== null && (
                 <button
                   onClick={toggleDark}
-                  className="text-fg-muted hover:text-fg transition-colors"
+                  className="text-fg-muted hover:text-fg transition-colors p-1.5 -m-1.5"
                   aria-label="Toggle dark mode"
                 >
-                  {dark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+                  {dark ? <Sun className="w-5 h-5 sm:w-4 sm:h-4" /> : <Moon className="w-5 h-5 sm:w-4 sm:h-4" />}
                 </button>
               )}
               <button
                 onClick={onSearchOpen}
-                className="text-fg-muted hover:text-fg transition-colors"
+                className="text-fg-muted hover:text-fg transition-colors p-1.5 -m-1.5"
                 aria-label="Search"
               >
-                <Search className="w-4 h-4" />
+                <Search className="w-5 h-5 sm:w-4 sm:h-4" />
               </button>
               <button
                 onClick={() => setMobileOpen(!mobileOpen)}
-                className="md:hidden text-fg-muted hover:text-fg transition-colors"
+                className="md:hidden text-fg-muted hover:text-fg transition-colors p-1.5 -m-1.5"
                 aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
               >
-                {mobileOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
+                {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
               </button>
             </div>
           </div>

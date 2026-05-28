@@ -30,16 +30,16 @@ export default function MobileMenu({ isOpen, onClose, links }: MobileMenuProps) 
           transition={{ duration: 0.15 }}
           className="fixed inset-x-0 top-14 z-40 md:hidden bg-glass backdrop-blur-xl border-b border-glass-border"
         >
-          <div className="px-5 py-3 space-y-0.5">
+          <div className="px-5 py-4 space-y-1">
             {links.map((link) =>
               link.dropdown ? (
                 <div key={link.href}>
                   <button
                     onClick={() => setExpandedDropdown(expandedDropdown === link.label ? null : link.label)}
-                    className="flex items-center justify-between w-full py-2.5 text-sm text-fg-secondary hover:text-fg transition-colors"
+                    className="flex items-center justify-between w-full py-3 text-base font-semibold text-fg-secondary hover:text-fg transition-colors"
                   >
                     {link.label}
-                    <ChevronDown className={`w-3.5 h-3.5 transition-transform ${expandedDropdown === link.label ? 'rotate-180' : ''}`} />
+                    <ChevronDown className={`w-4 h-4 transition-transform ${expandedDropdown === link.label ? 'rotate-180' : ''}`} />
                   </button>
                   <AnimatePresence>
                     {expandedDropdown === link.label && (
@@ -50,13 +50,13 @@ export default function MobileMenu({ isOpen, onClose, links }: MobileMenuProps) 
                         transition={{ duration: 0.15 }}
                         className="overflow-hidden"
                       >
-                        <div className="pl-4 pb-1 space-y-0.5">
+                        <div className="pl-4 pb-1 space-y-1">
                           {link.dropdown.map((item) => (
                             <Link
                               key={item.href}
                               href={item.href}
                               onClick={onClose}
-                              className="block py-2 text-sm text-fg-muted hover:text-fg transition-colors"
+                              className="block py-2.5 text-[15px] text-fg-muted hover:text-fg transition-colors"
                             >
                               {item.label}
                             </Link>
@@ -71,7 +71,7 @@ export default function MobileMenu({ isOpen, onClose, links }: MobileMenuProps) 
                   key={link.href}
                   href={link.href}
                   onClick={onClose}
-                  className="block py-2.5 text-sm text-fg-secondary hover:text-fg transition-colors"
+                  className="block py-3 text-base font-semibold text-fg-secondary hover:text-fg transition-colors"
                 >
                   {link.label}
                 </Link>

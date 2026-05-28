@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowLeft, FileText } from 'lucide-react'
+import GltfViewerLoader from '@/components/vehicle/GltfViewerLoader'
 
 export const metadata: Metadata = {
   title: 'Sea++ | Past Vehicle',
@@ -29,6 +30,10 @@ export default function SeaPlusPlusPage() {
           <p className="mt-3 text-sm sm:text-base text-fg-muted max-w-lg leading-relaxed">
             Our inaugural AUV, built by a first-year team of 10 students. Used a BlueROV2 R2 frame with off-the-shelf components, YOLO v4 object detection, ROS with PID control, dual lowlight cameras, and an NVIDIA Jetson Nano. Designed as a reliable foundation for future years.
           </p>
+
+          <div className="mt-12">
+            <GltfViewerLoader url="/models/sea-plus-plus.glb" />
+          </div>
 
           <div className="mt-12 p-8 rounded-2xl border border-border-subtle bg-surface/30">
             <p className="text-sm text-fg-muted text-center">

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowLeft, FileText } from 'lucide-react'
+import GltfViewerLoader from '@/components/vehicle/GltfViewerLoader'
 
 export const metadata: Metadata = {
   title: 'Krabby Patty | Past Vehicle',
@@ -29,6 +30,10 @@ export default function KrabbyPattyPage() {
           <p className="mt-3 text-sm sm:text-base text-fg-muted max-w-lg leading-relaxed">
             Refined for reliability and strategic task execution. Features an octagonal aluminum frame with custom CNC-milled 6061-T6 components, dual ZED 2i stereo cameras, NVIDIA Jetson Orin Nano, a double-jointed servo-powered claw, and a YOLOv8 vision pipeline with 3D spatial localization.
           </p>
+
+          <div className="mt-12">
+            <GltfViewerLoader url="/models/krabby_patty.glb" />
+          </div>
 
           <div className="mt-12 p-8 rounded-2xl border border-border-subtle bg-surface/30">
             <p className="text-sm text-fg-muted text-center">

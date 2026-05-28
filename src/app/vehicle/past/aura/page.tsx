@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowLeft, FileText } from 'lucide-react'
+import GltfViewerLoader from '@/components/vehicle/GltfViewerLoader'
 
 export const metadata: Metadata = {
   title: 'Aura | Past Vehicle',
@@ -29,6 +30,10 @@ export default function AuraPage() {
           <p className="mt-3 text-sm sm:text-base text-fg-muted max-w-lg leading-relaxed">
             Newly built AUV designed for autonomous movement and modularity. Integrated YOLOv8 for vision, a Doppler Velocity Log for underwater positioning, upgraded claw and torpedo systems, and behavior tree mission planning on a BlueROV2 frame with an NVIDIA Jetson Nano.
           </p>
+
+          <div className="mt-12">
+            <GltfViewerLoader url="/models/aura.glb" />
+          </div>
 
           <div className="mt-12 p-8 rounded-2xl border border-border-subtle bg-surface/30">
             <p className="text-sm text-fg-muted text-center">

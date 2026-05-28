@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { ChevronLeft } from 'lucide-react'
 import { getTeamYears, getMembersByYear } from '@/lib/data/team-members'
 import TeamGrid from '@/components/team/TeamGrid'
 import { notFound } from 'next/navigation'
@@ -25,13 +24,6 @@ export default async function TeamYearPage({ params }: { params: Promise<{ year:
     <div className="pt-20 pb-16">
       <section className="px-5 sm:px-8 py-16">
         <div className="max-w-6xl mx-auto">
-          <Link
-            href="/about"
-            className="inline-flex items-center gap-1 text-xs text-fg-muted hover:text-fg transition-colors mb-6"
-          >
-            <ChevronLeft className="w-3 h-3" />
-            All Years
-          </Link>
           <h1 className="font-display text-2xl sm:text-3xl font-light text-fg tracking-tight">
             {year} Team
           </h1>
@@ -39,7 +31,26 @@ export default async function TeamYearPage({ params }: { params: Promise<{ year:
             {members.length} members
           </p>
 
-          <div className="mt-14">
+          <div className="mt-8 flex flex-wrap gap-2">
+            {getTeamYears().map((y) => {
+              const isActive = y === year
+              return (
+                <Link
+                  key={y}
+                  href={`/about/${y}`}
+                  className={
+                    isActive
+                      ? 'px-3 py-1.5 rounded-full text-xs font-medium bg-accent text-page'
+                      : 'px-3 py-1.5 rounded-full text-xs font-medium bg-surface border border-border-subtle text-fg-muted hover:text-fg hover:border-accent/40 transition-colors'
+                  }
+                >
+                  {y}
+                </Link>
+              )
+            })}
+          </div>
+
+          <div className="mt-10">
             <TeamGrid year={year} />
           </div>
         </div>

@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { ChevronRight } from 'lucide-react'
 import { getTeamYears, getMembersByYear } from '@/lib/data/team-members'
 import TeamGrid from '@/components/team/TeamGrid'
 
@@ -13,7 +12,6 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   const years = getTeamYears()
-  const pastYears = years.filter((y) => y !== CURRENT_YEAR)
 
   return (
     <div className="pt-20 pb-16">
@@ -30,42 +28,34 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <div className="mt-14">
-            <h2 className="font-display text-xl sm:text-2xl font-light text-fg tracking-tight mb-2">
-              {CURRENT_YEAR} Team
-            </h2>
-            <p className="text-xs text-fg-muted mb-8">
-              {getMembersByYear(CURRENT_YEAR).length} members
-            </p>
-            <TeamGrid year={CURRENT_YEAR} />
+          <h2 className="mt-14 font-display text-xl sm:text-2xl font-light text-fg tracking-tight mb-2">
+            {CURRENT_YEAR} Team
+          </h2>
+          <p className="text-xs text-fg-muted">
+            {getMembersByYear(CURRENT_YEAR).length} members
+          </p>
+
+          <div className="mt-8 flex flex-wrap gap-2">
+            {years.map((y) => {
+              const isActive = y === CURRENT_YEAR
+              return (
+                <Link
+                  key={y}
+                  href={isActive ? '/about' : `/about/${y}`}
+                  className={
+                    isActive
+                      ? 'px-3 py-1.5 rounded-full text-xs font-medium bg-accent text-page'
+                      : 'px-3 py-1.5 rounded-full text-xs font-medium bg-surface border border-border-subtle text-fg-muted hover:text-fg hover:border-accent/40 transition-colors'
+                  }
+                >
+                  {y}
+                </Link>
+              )
+            })}
           </div>
 
-          <div className="mt-20">
-            <h2 className="font-display text-sm font-medium text-fg-muted uppercase tracking-wide mb-4">
-              Past Teams
-            </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {pastYears.map((year) => {
-                const members = getMembersByYear(year)
-                return (
-                  <Link
-                    key={year}
-                    href={`/about/${year}`}
-                    className="group flex items-center justify-between p-5 rounded-xl bg-surface border border-border-subtle hover:border-accent/40 transition-colors"
-                  >
-                    <div>
-                      <h3 className="font-display text-lg font-light text-fg tracking-tight">
-                        {year}
-                      </h3>
-                      <p className="text-xs text-fg-muted mt-1">
-                        {members.length} members
-                      </p>
-                    </div>
-                    <ChevronRight className="w-4 h-4 text-fg-muted group-hover:text-accent transition-colors" />
-                  </Link>
-                )
-              })}
-            </div>
+          <div className="mt-10">
+            <TeamGrid year={CURRENT_YEAR} />
           </div>
         </div>
       </section>

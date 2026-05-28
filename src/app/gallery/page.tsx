@@ -1,10 +1,10 @@
 'use client'
 
-import { useState, useEffect, useCallback, useRef } from 'react'
+import { useState, useEffect, useCallback, useRef, useMemo } from 'react'
 import Image from 'next/image'
 import { X, ChevronLeft, ChevronRight } from 'lucide-react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { galleryItems, type GalleryItem } from '@/lib/data/gallery-items'
+import { galleryItems } from '@/lib/data/gallery-items'
 import { cn } from '@/lib/utils'
 
 const categories = [
@@ -23,11 +23,11 @@ export default function GalleryPage() {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
   const touchStartX = useRef<number | null>(null)
 
-  const filtered = galleryItems.filter((item) => {
+  const filtered = useMemo(() => galleryItems.filter((item) => {
     if (category && item.category !== category) return false
     if (year && item.year !== year) return false
     return true
-  })
+  }), [category, year])
 
   const lightbox = lightboxIndex !== null ? filtered[lightboxIndex] : null
 

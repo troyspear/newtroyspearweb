@@ -1,10 +1,24 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useSyncExternalStore } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Search, Menu, X, Moon, Sun, ChevronDown } from 'lucide-react'
 import MobileMenu from './MobileMenu'
+
+function subscribeDark(callback: () => void) {
+  const obs = new MutationObserver(callback)
+  obs.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
+  return () => obs.disconnect()
+}
+
+function getDarkSnapshot() {
+  return document.documentElement.classList.contains('dark')
+}
+
+function getDarkServerSnapshot(): boolean | null {
+  return null
+}
 
 const vehicleDropdownItems = [
   { href: '/vehicle', label: 'Poseidon Mk. II' },
@@ -25,14 +39,10 @@ const navLinks = [
 
 export default function Navbar({ onSearchOpen }: { onSearchOpen: () => void }) {
   const [mobileOpen, setMobileOpen] = useState(false)
-  const [dark, setDark] = useState<boolean | null>(null)
+  const dark = useSyncExternalStore(subscribeDark, getDarkSnapshot, getDarkServerSnapshot)
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
-
-  useEffect(() => {
-    setDark(document.documentElement.classList.contains('dark'))
-  }, [])
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -55,7 +65,6 @@ export default function Navbar({ onSearchOpen }: { onSearchOpen: () => void }) {
 
   function toggleDark() {
     const next = !dark
-    setDark(next)
     document.documentElement.classList.toggle('dark', next)
     document.documentElement.style.colorScheme = next ? 'dark' : 'light'
     localStorage.setItem('theme', next ? 'dark' : 'light')

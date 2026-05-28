@@ -22,9 +22,30 @@ export default function CompetitionCountdown() {
   const [timeLeft, setTimeLeft] = useState<ReturnType<typeof getTimeLeft> | null>(null)
 
   useEffect(() => {
-    setTimeLeft(getTimeLeft())
-    const interval = setInterval(() => setTimeLeft(getTimeLeft()), 1000)
-    return () => clearInterval(interval)
+    let interval: ReturnType<typeof setInterval> | null = null
+
+    const start = () => {
+      if (interval) return
+      setTimeLeft(getTimeLeft())
+      interval = setInterval(() => setTimeLeft(getTimeLeft()), 1000)
+    }
+    const stop = () => {
+      if (interval) {
+        clearInterval(interval)
+        interval = null
+      }
+    }
+    const onVis = () => {
+      if (document.hidden) stop()
+      else start()
+    }
+
+    start()
+    document.addEventListener('visibilitychange', onVis)
+    return () => {
+      stop()
+      document.removeEventListener('visibilitychange', onVis)
+    }
   }, [])
 
   return (

@@ -4,10 +4,6 @@ import { useState, useEffect, useRef, useCallback, useMemo } from 'react'
 import { Search, X, FileText, Users, Wrench, Image as ImageIcon, BookOpen, Heart } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
-import { blogPosts } from '@/lib/data/blog-posts'
-import { teamMembers, subTeams } from '@/lib/data/team-members'
-import { vehicleSpecs, subsystems } from '@/lib/data/vehicle-specs'
-import { sponsors } from '@/lib/data/sponsors'
 
 interface SearchItem {
   title: string
@@ -16,18 +12,32 @@ interface SearchItem {
   category: string
 }
 
-function buildSearchData(): SearchItem[] {
-  const items: SearchItem[] = [
-    { title: 'Home', description: 'Welcome to Troy SPEAR underwater robotics', href: '/', category: 'Pages' },
-    { title: 'Team', description: 'Meet our team members and sub-teams', href: '/about', category: 'Pages' },
-    { title: 'Vehicle', description: 'Poseidon Mk. II autonomous underwater vehicle', href: '/vehicle', category: 'Pages' },
-    { title: 'Documentation', description: 'Build logs, test results, and design decisions', href: '/documentation', category: 'Pages' },
-    { title: 'Sponsors', description: 'Our sponsors and supporters', href: '/sponsors', category: 'Pages' },
-    { title: 'Gallery', description: 'Photos from competitions, pool tests, and build sessions', href: '/gallery', category: 'Pages' },
-    { title: 'Contact', description: 'Get in touch with Troy SPEAR', href: '/contact', category: 'Pages' },
-    { title: 'Technical Design Reports', description: 'TDRs from past competition years', href: '/vehicle/tdrs', category: 'Pages' },
-    { title: 'Past Vehicles', description: 'Krabby Patty, Aura, Sea++', href: '/vehicle/past/krabby-patty', category: 'Pages' },
-  ]
+const STATIC_PAGES: SearchItem[] = [
+  { title: 'Home', description: 'Welcome to Troy SPEAR underwater robotics', href: '/', category: 'Pages' },
+  { title: 'Team', description: 'Meet our team members and sub-teams', href: '/about', category: 'Pages' },
+  { title: 'Vehicle', description: 'Poseidon Mk. II autonomous underwater vehicle', href: '/vehicle', category: 'Pages' },
+  { title: 'Documentation', description: 'Build logs, test results, and design decisions', href: '/documentation', category: 'Pages' },
+  { title: 'Sponsors', description: 'Our sponsors and supporters', href: '/sponsors', category: 'Pages' },
+  { title: 'Gallery', description: 'Photos from competitions, pool tests, and build sessions', href: '/gallery', category: 'Pages' },
+  { title: 'Contact', description: 'Get in touch with Troy SPEAR', href: '/contact', category: 'Pages' },
+  { title: 'Technical Design Reports', description: 'TDRs from past competition years', href: '/vehicle/tdrs', category: 'Pages' },
+  { title: 'Past Vehicles', description: 'Krabby Patty, Aura, Sea++', href: '/vehicle/past/krabby-patty', category: 'Pages' },
+]
+
+async function buildSearchData(): Promise<SearchItem[]> {
+  const [
+    { blogPosts },
+    { teamMembers, subTeams },
+    { vehicleSpecs, subsystems },
+    { sponsors },
+  ] = await Promise.all([
+    import('@/lib/data/blog-posts'),
+    import('@/lib/data/team-members'),
+    import('@/lib/data/vehicle-specs'),
+    import('@/lib/data/sponsors'),
+  ])
+
+  const items: SearchItem[] = [...STATIC_PAGES]
 
   for (const post of blogPosts) {
     items.push({
@@ -86,8 +96,6 @@ function buildSearchData(): SearchItem[] {
   return items
 }
 
-const searchData = buildSearchData()
-
 const categoryIcons: Record<string, typeof Search> = {
   Pages: FileText,
   Docs: BookOpen,
@@ -99,32 +107,36 @@ const categoryIcons: Record<string, typeof Search> = {
 
 export default function SearchModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
   const [query, setQuery] = useState('')
+  const [searchData, setSearchData] = useState<SearchItem[]>(STATIC_PAGES)
   const [fuseInstance, setFuseInstance] = useState<import('fuse.js').default<SearchItem> | null>(null)
   const inputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
-    if (isOpen && !fuseInstance) {
-      import('fuse.js').then((mod) => {
-        const Fuse = mod.default
-        setFuseInstance(new Fuse(searchData, {
-          keys: [
-            { name: 'title', weight: 2 },
-            { name: 'description', weight: 1.5 },
-            { name: 'category', weight: 0.5 },
-          ],
-          threshold: 0.4,
-          ignoreLocation: true,
-          minMatchCharLength: 2,
-        }))
-      })
-    }
+    if (!isOpen || fuseInstance) return
+    let cancelled = false
+    Promise.all([import('fuse.js'), buildSearchData()]).then(([mod, items]) => {
+      if (cancelled) return
+      const Fuse = mod.default
+      setSearchData(items)
+      setFuseInstance(new Fuse(items, {
+        keys: [
+          { name: 'title', weight: 2 },
+          { name: 'description', weight: 1.5 },
+          { name: 'category', weight: 0.5 },
+        ],
+        threshold: 0.4,
+        ignoreLocation: true,
+        minMatchCharLength: 2,
+      }))
+    })
+    return () => { cancelled = true }
   }, [isOpen, fuseInstance])
 
   const results = useMemo(() => {
     if (query.length === 0) return searchData.slice(0, 6)
     if (!fuseInstance) return []
     return fuseInstance.search(query).slice(0, 10).map((r) => r.item)
-  }, [query, fuseInstance])
+  }, [query, fuseInstance, searchData])
 
   const grouped = useMemo(() => {
     return results.reduce<Record<string, SearchItem[]>>((acc, item) => {
@@ -136,17 +148,22 @@ export default function SearchModal({ isOpen, onClose }: { isOpen: boolean; onCl
 
   useEffect(() => {
     if (isOpen) {
-      setQuery('')
-      setTimeout(() => inputRef.current?.focus(), 100)
+      const id = setTimeout(() => inputRef.current?.focus(), 100)
+      return () => clearTimeout(id)
     }
   }, [isOpen])
+
+  const handleClose = useCallback(() => {
+    setQuery('')
+    onClose()
+  }, [onClose])
 
   const handleKeyDown = useCallback((e: KeyboardEvent) => {
     if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
       e.preventDefault()
     }
-    if (e.key === 'Escape') onClose()
-  }, [onClose])
+    if (e.key === 'Escape') handleClose()
+  }, [handleClose])
 
   useEffect(() => {
     document.addEventListener('keydown', handleKeyDown)
@@ -162,7 +179,7 @@ export default function SearchModal({ isOpen, onClose }: { isOpen: boolean; onCl
           exit={{ opacity: 0 }}
           transition={{ duration: 0.1 }}
           className="fixed inset-0 z-[100] flex items-start justify-center pt-[20vh]"
-          onClick={onClose}
+          onClick={handleClose}
         >
           <div className="fixed inset-0 bg-black/20 backdrop-blur-sm" />
           <motion.div
@@ -182,7 +199,7 @@ export default function SearchModal({ isOpen, onClose }: { isOpen: boolean; onCl
                 placeholder="Search..."
                 className="flex-1 py-3.5 bg-transparent text-fg text-sm placeholder:text-fg-secondary outline-none focus:outline-none focus-visible:outline-none"
               />
-              <button onClick={onClose} className="text-fg-muted hover:text-fg">
+              <button onClick={handleClose} className="text-fg-muted hover:text-fg">
                 <X className="w-3.5 h-3.5" />
               </button>
             </div>
@@ -199,7 +216,7 @@ export default function SearchModal({ isOpen, onClose }: { isOpen: boolean; onCl
                       <Link
                         key={`${item.href}|${item.title}|${i}`}
                         href={item.href}
-                        onClick={onClose}
+                        onClick={handleClose}
                         className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-surface/80 transition-colors"
                       >
                         <Icon className="w-3.5 h-3.5 text-fg-muted shrink-0" />

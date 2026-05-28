@@ -6,8 +6,6 @@ import { Zap, Eye, Cpu, Box, Play } from 'lucide-react'
 
 const iconMap: Record<string, typeof Zap> = { zap: Zap, eye: Eye, cpu: Cpu, box: Box }
 
-export const dynamic = 'force-dynamic'
-
 export const metadata: Metadata = {
   title: 'Vehicle',
   description: 'Explore our autonomous underwater vehicle: interactive 3D viewer, specs, and subsystem documentation.',

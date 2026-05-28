@@ -11,7 +11,7 @@ export default function SplineBackground() {
   const appRef = useRef<Application | null>(null)
   const containerRef = useRef<HTMLDivElement | null>(null)
   const [loaded, setLoaded] = useState(false)
-  const initialSceneRef = useRef(
+  const [initialScene] = useState(() =>
     typeof document !== 'undefined' && document.documentElement.classList.contains('dark')
       ? DARK_SCENE
       : LIGHT_SCENE,
@@ -81,7 +81,7 @@ export default function SplineBackground() {
       aria-hidden="true"
     >
       <Spline
-        scene={initialSceneRef.current}
+        scene={initialScene}
         renderOnDemand
         style={{ width: '100%', height: '100%' }}
         onLoad={(app) => {

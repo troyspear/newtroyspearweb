@@ -15,7 +15,7 @@ interface SearchItem {
 const STATIC_PAGES: SearchItem[] = [
   { title: 'Home', description: 'Welcome to Troy SPEAR underwater robotics', href: '/', category: 'Pages' },
   { title: 'Team', description: 'Meet our team members and sub-teams', href: '/about', category: 'Pages' },
-  { title: 'Vehicle', description: 'Poseidon Mk. II autonomous underwater vehicle', href: '/vehicle', category: 'Pages' },
+  { title: 'Vehicle', description: 'ORCA autonomous underwater vehicle', href: '/vehicle', category: 'Pages' },
   { title: 'Documentation', description: 'Build logs, test results, and design decisions', href: '/documentation', category: 'Pages' },
   { title: 'Sponsors', description: 'Our sponsors and supporters', href: '/sponsors', category: 'Pages' },
   { title: 'Gallery', description: 'Photos from competitions, pool tests, and build sessions', href: '/gallery', category: 'Pages' },

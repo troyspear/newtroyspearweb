@@ -4,7 +4,7 @@ export interface VehicleSpec {
 }
 
 export const vehicleSpecs: VehicleSpec[] = [
-  { label: 'Vehicle Name', value: 'Poseidon Mk. II' },
+  { label: 'Vehicle Name', value: 'ORCA' },
   { label: 'Dimensions', value: '60 × 40 × 30 cm' },
   { label: 'Weight (dry)', value: '12.5 kg' },
   { label: 'Weight (wet)', value: '~0.5 kg positive buoyancy' },

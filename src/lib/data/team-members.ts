@@ -44,7 +44,6 @@ export const teamMembers: TeamMember[] = [
   { name: 'Rener Li', role: 'Member', subTeam: 'Software', image: '/images/team/placeholder-member.jpg', year: '2025-2026', grade: 10 },
   { name: 'Cristian Liu', role: 'Member', subTeam: 'Software', image: '/images/team/placeholder-member.jpg', year: '2025-2026', grade: 10 },
   { name: 'Shreyas Rawat', role: 'Member', subTeam: 'Software', image: '/images/team/placeholder-member.jpg', year: '2025-2026', grade: 9 },
-  { name: 'Ryan Zhou', role: 'Member', subTeam: 'Software', image: '/images/team/placeholder-member.jpg', year: '2025-2026', grade: 11 },
 
   // --- 2024-2025 ---
 

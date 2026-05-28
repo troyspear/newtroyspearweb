@@ -10,7 +10,7 @@ import { FileText, Beaker, CheckCircle, AlertCircle, Clock, ChevronLeft, Chevron
 const tdrs = [
   {
     year: '2025-2026',
-    vehicle: 'Poseidon Mk. II',
+    vehicle: 'ORCA',
     vehicleSlug: '/vehicle',
     description: '',
     pdfUrl: '',

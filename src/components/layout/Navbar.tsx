@@ -21,7 +21,7 @@ function getDarkServerSnapshot(): boolean | null {
 }
 
 const vehicleDropdownItems = [
-  { href: '/vehicle', label: 'Poseidon Mk. II' },
+  { href: '/vehicle', label: 'ORCA' },
   { href: '/vehicle/past/krabby-patty', label: 'Krabby Patty' },
   { href: '/vehicle/past/aura', label: 'Aura' },
   { href: '/vehicle/past/sea-plus-plus', label: 'Sea++' },

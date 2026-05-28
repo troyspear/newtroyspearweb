@@ -17,11 +17,10 @@ export default function VehiclePage() {
       <section className="px-5 sm:px-8 py-16">
         <div className="max-w-6xl mx-auto">
           <h1 className="font-display text-3xl sm:text-4xl font-light text-fg tracking-tight">
-            Poseidon Mk. II
+            ORCA
           </h1>
           <p className="mt-3 text-sm sm:text-base text-fg-muted max-w-lg">
-            8 thrusters, dual-camera vision, modular frame.
-            Fully student-designed for RoboSub 2026.
+            Coming soon.
           </p>
         </div>
       </section>
@@ -41,7 +40,7 @@ export default function VehiclePage() {
           <div className="relative aspect-video rounded-2xl overflow-hidden bg-surface border border-border-subtle">
             {/* <iframe
               src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
-              title="Poseidon Mk. II: Vehicle Overview"
+              title="ORCA: Vehicle Overview"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
               className="absolute inset-0 w-full h-full"

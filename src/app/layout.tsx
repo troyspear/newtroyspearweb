@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 import ClientShell from '@/components/layout/ClientShell'
+import { SITE_URL } from '@/lib/site'
 import './globals.css'
 
 const nbInternational = localFont({
@@ -12,6 +13,7 @@ const nbInternational = localFont({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
     default: 'Troy SPEAR | Underwater Robotics',
     template: '%s | Troy SPEAR',

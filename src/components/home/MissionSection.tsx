@@ -82,7 +82,7 @@ export default function MissionSection() {
               </div>
               <div className="aspect-[4/5] rounded-lg overflow-hidden">
                 <Image
-                  src="/images/gallery/23-24/2023-4_build.png"
+                  src="/images/gallery/23-24/2023-4_build-hero.jpg"
                   alt="Building the vehicle"
                   width={960}
                   height={717}

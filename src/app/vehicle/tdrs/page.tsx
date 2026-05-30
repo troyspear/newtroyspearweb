@@ -1,35 +1,12 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { FileText, ArrowLeft } from 'lucide-react'
+import { publishedTdrs } from '@/lib/data/tdrs'
 
 export const metadata: Metadata = {
   title: 'Technical Design Reports',
   description: 'Past engineering design documents detailing vehicle systems, software architecture, and testing results.',
 }
-
-const tdrs = [
-  {
-    year: '2024-2025',
-    vehicle: 'Krabby Patty',
-    vehicleSlug: '/vehicle/past/krabby-patty',
-    description: 'Octagonal aluminum frame with custom CNC-milled components, dual ZED 2i stereo cameras, NVIDIA Jetson Orin Nano, double-jointed claw, and YOLOv8 with 3D spatial localization.',
-    pdfUrl: '/documents/tdr-2025.pdf',
-  },
-  {
-    year: '2023-2024',
-    vehicle: 'Aura',
-    vehicleSlug: '/vehicle/past/aura',
-    description: 'Newly built AUV integrating YOLOv8 vision, DVL for underwater positioning, upgraded claw and torpedo systems, and behavior tree mission planning on a BlueROV2 frame.',
-    pdfUrl: '/documents/tdr-2024.pdf',
-  },
-  {
-    year: '2022-2023',
-    vehicle: 'Sea++',
-    vehicleSlug: '/vehicle/past/sea-plus-plus',
-    description: 'Our inaugural AUV built by 10 students using a BlueROV2 R2 frame, YOLO v4 object detection, ROS with PID control, and an NVIDIA Jetson Nano. Designed as the foundation for future years.',
-    pdfUrl: '/documents/tdr-2023.pdf',
-  }
-]
 
 export default function TDRsPage() {
   return (
@@ -57,7 +34,7 @@ export default function TDRsPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {tdrs.map((tdr) => (
+            {publishedTdrs.map((tdr) => (
               <div
                 key={tdr.year}
                 className="bg-glass border border-glass-border hover:border-accent/40 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between"

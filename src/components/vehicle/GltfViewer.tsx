@@ -1,11 +1,10 @@
 'use client'
 
-import { Suspense, useEffect, useMemo, useRef, useState } from 'react'
+import { Suspense, useEffect } from 'react'
 import { Canvas, useThree } from '@react-three/fiber'
 import { OrbitControls, Center, Bounds, useGLTF } from '@react-three/drei'
 import { Anchor } from 'lucide-react'
-
-const RESUME_AFTER_IDLE_MS = 4000
+import { useLazyCanvas } from './useLazyCanvas'
 
 function GltfModel({ url }: { url: string }) {
   const { scene } = useGLTF(url)
@@ -28,76 +27,21 @@ function ViewerFallback({ label = 'Loading model…' }: { label?: string }) {
 }
 
 export default function GltfViewer({ url }: { url: string }) {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const [shouldMount, setShouldMount] = useState(false)
-  const [active, setActive] = useState(false)
-  const [pageVisible, setPageVisible] = useState(true)
-  const [userEngaged, setUserEngaged] = useState(false)
-  const idleTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
-
-  useEffect(() => {
-    const el = containerRef.current
-    if (!el) return
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            setShouldMount(true)
-            setActive(true)
-          } else {
-            setActive(false)
-          }
-        }
-      },
-      { rootMargin: '200px 0px', threshold: 0.01 }
-    )
-    io.observe(el)
-    return () => io.disconnect()
-  }, [])
-
-  useEffect(() => {
-    const onVis = () => setPageVisible(!document.hidden)
-    document.addEventListener('visibilitychange', onVis)
-    return () => document.removeEventListener('visibilitychange', onVis)
-  }, [])
-
-  useEffect(() => {
-    return () => {
-      if (idleTimerRef.current) clearTimeout(idleTimerRef.current)
-    }
-  }, [])
+  const {
+    containerRef,
+    shouldMount,
+    autoRotating,
+    frameloop,
+    dpr,
+    handleStart,
+    handleEnd,
+  } = useLazyCanvas()
 
   useEffect(() => {
     return () => {
       try { useGLTF.clear(url) } catch {}
     }
   }, [url])
-
-  const dpr = useMemo<[number, number]>(() => {
-    if (typeof window === 'undefined') return [1, 1.5]
-    const isMobile = window.innerWidth < 768
-    return isMobile ? [1, 1.25] : [1, 1.5]
-  }, [])
-
-  const handleStart = () => {
-    setUserEngaged(true)
-    if (idleTimerRef.current) {
-      clearTimeout(idleTimerRef.current)
-      idleTimerRef.current = null
-    }
-  }
-
-  const handleEnd = () => {
-    if (idleTimerRef.current) clearTimeout(idleTimerRef.current)
-    idleTimerRef.current = setTimeout(() => {
-      setUserEngaged(false)
-      idleTimerRef.current = null
-    }, RESUME_AFTER_IDLE_MS)
-  }
-
-  const autoRotating = active && pageVisible && !userEngaged
-  const rendering = active && pageVisible
-  const frameloop: 'always' | 'demand' = autoRotating || userEngaged ? 'always' : 'demand'
 
   return (
     <div
@@ -110,7 +54,7 @@ export default function GltfViewer({ url }: { url: string }) {
             camera={{ position: [2.5, 1.8, 2.5], fov: 45 }}
             dpr={dpr}
             gl={{ antialias: false, powerPreference: 'low-power' }}
-            frameloop={rendering ? frameloop : 'demand'}
+            frameloop={frameloop}
             performance={{ min: 0.5 }}
           >
             <ambientLight intensity={0.6} />

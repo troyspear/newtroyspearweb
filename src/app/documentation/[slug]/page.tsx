@@ -71,10 +71,10 @@ function MediaPlaceholder({ item }: { item: BlogMedia }) {
 
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const post = blogPosts.find((p) => p.slug === slug)
-  if (!post) notFound()
-
   const postIndex = blogPosts.findIndex((p) => p.slug === slug)
+  if (postIndex === -1) notFound()
+
+  const post = blogPosts[postIndex]
   const prevPost = postIndex > 0 ? blogPosts[postIndex - 1] : null
   const nextPost = postIndex < blogPosts.length - 1 ? blogPosts[postIndex + 1] : null
 

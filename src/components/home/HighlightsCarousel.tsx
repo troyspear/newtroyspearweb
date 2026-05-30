@@ -4,22 +4,10 @@ import Link from 'next/link'
 
 const highlights = [
   {
-    title: 'Hull Design v2 Complete',
-    description: '30% drag reduction with new streamlined torpedo hull.',
-    date: 'Sep 2025',
-    href: '/documentation/hull-design-v2',
-  },
-  {
-    title: 'First Pool Test Success',
-    description: 'Validated waterproof integrity and thruster control at 3m.',
-    date: 'Aug 2025',
-    href: '/documentation/pool-test-march-2025',
-  },
-  {
-    title: 'Computer Vision Pipeline',
-    description: 'YOLOv8 at 30 FPS on NVIDIA Jetson.',
-    date: 'Jun 2025',
-    href: '/documentation/software-autonomy-stack',
+    title: 'Fixing Camera Latency: ONNX to TensorRT',
+    description: 'Migrating our model runtime from ONNX to TensorRT on the Jetson Orin Nano.',
+    date: 'May 2026',
+    href: '/documentation/camera-latency-tensorrt',
   },
 ]
 

@@ -7,7 +7,7 @@ import type { Application } from '@splinetool/runtime'
 const LIGHT_SCENE = '/models/light-scene.splinecode'
 const DARK_SCENE = '/models/dark-scene.splinecode'
 
-export default function SplineBackground() {
+export default function SplineBackground({ active }: { active: boolean }) {
   const appRef = useRef<Application | null>(null)
   const containerRef = useRef<HTMLDivElement | null>(null)
   const [loaded, setLoaded] = useState(false)
@@ -32,6 +32,10 @@ export default function SplineBackground() {
     return () => observer.disconnect()
   }, [])
 
+  // Resume rendering only when this background is the active route (home),
+  // in view, and the tab is visible — otherwise pause the render loop. The
+  // component itself is never unmounted (it lives in the persistent shell),
+  // so the WebGL context stays warm and returning home repaints instantly.
   useEffect(() => {
     const el = containerRef.current
     if (!el) return
@@ -42,7 +46,7 @@ export default function SplineBackground() {
     const apply = () => {
       const app = appRef.current
       if (!app) return
-      if (inView && visible) {
+      if (active && inView && visible) {
         try { app.play?.() } catch {}
         try { app.requestRender?.() } catch {}
       } else {
@@ -67,11 +71,13 @@ export default function SplineBackground() {
     }
     document.addEventListener('visibilitychange', onVisibility)
 
+    apply()
+
     return () => {
       io?.disconnect()
       document.removeEventListener('visibilitychange', onVisibility)
     }
-  }, [loaded])
+  }, [loaded, active])
 
   return (
     <div
@@ -80,10 +86,13 @@ export default function SplineBackground() {
       style={{ opacity: loaded ? 1 : 0 }}
       aria-hidden="true"
     >
+      {/* The "Built with Spline" watermark is drawn inside the canvas at the
+          bottom-right. Extending the canvas below the overflow-hidden container
+          pushes the watermark out of view without an opaque cover patch. */}
       <Spline
         scene={initialScene}
         renderOnDemand
-        style={{ width: '100%', height: '100%' }}
+        style={{ width: '100%', height: 'calc(100% + 90px)' }}
         onLoad={(app) => {
           appRef.current = app
           setLoaded(true)

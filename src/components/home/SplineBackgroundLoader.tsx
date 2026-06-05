@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import dynamic from 'next/dynamic'
+import { cn } from '@/lib/utils'
 
 const SplineBackground = dynamic(() => import('./SplineBackground'), {
   ssr: false,
@@ -12,9 +13,9 @@ const DESKTOP_BREAKPOINT = 768
 function GradientFallback() {
   return (
     <div className="absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
-      <div className="absolute inset-0 animate-gradient-shift bg-[length:200%_200%] bg-gradient-to-br from-accent/20 via-accent/5 to-accent/15 dark:from-accent/25 dark:via-accent/8 dark:to-accent/10" />
-      <div className="absolute top-[10%] left-[15%] w-48 h-48 rounded-full bg-accent/10 dark:bg-accent/15 blur-3xl animate-gradient-shift" />
-      <div className="absolute bottom-[20%] right-[10%] w-64 h-64 rounded-full bg-accent/8 dark:bg-accent/12 blur-3xl animate-gradient-shift [animation-delay:3s]" />
+      <div className="absolute inset-0 animate-gradient-shift bg-[length:200%_200%] bg-gradient-to-br from-[#2C6E4959] via-[#4C956C1F] to-[#14452F47] dark:from-accent/25 dark:via-accent/8 dark:to-accent/10" />
+      <div className="absolute top-[10%] left-[15%] w-48 h-48 rounded-full bg-[#2C6E4933] dark:bg-accent/15 blur-3xl animate-gradient-shift" />
+      <div className="absolute bottom-[20%] right-[10%] w-64 h-64 rounded-full bg-[#14452F29] dark:bg-accent/12 blur-3xl animate-gradient-shift [animation-delay:3s]" />
       <div className="absolute inset-0 bg-gradient-to-t from-page via-transparent to-page/80" />
     </div>
   )
@@ -30,7 +31,7 @@ function shouldUseSpline() {
   return true
 }
 
-export default function SplineBackgroundLoader() {
+export default function SplineBackgroundLoader({ active }: { active: boolean }) {
   const [useSpline, setUseSpline] = useState(false)
   const [shouldMountSpline, setShouldMountSpline] = useState(false)
 
@@ -83,14 +84,16 @@ export default function SplineBackgroundLoader() {
     }
   }, [useSpline])
 
-  if (!useSpline || !shouldMountSpline) {
-    return <GradientFallback />
-  }
-
   return (
-    <>
+    <div
+      className={cn(
+        'fixed inset-0 -z-10 pointer-events-none',
+        active ? 'opacity-100' : 'opacity-0',
+      )}
+      aria-hidden="true"
+    >
       <GradientFallback />
-      <SplineBackground />
-    </>
+      {useSpline && shouldMountSpline && <SplineBackground active={active} />}
+    </div>
   )
 }

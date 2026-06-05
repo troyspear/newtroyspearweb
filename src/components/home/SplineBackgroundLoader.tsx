@@ -87,7 +87,9 @@ export default function SplineBackgroundLoader({ active }: { active: boolean }) 
   return (
     <div
       className={cn(
-        'fixed inset-0 -z-10 pointer-events-none',
+        // Absolute (not fixed) so the background scrolls away with the hero
+        // instead of staying put while the lower sections scroll over it.
+        'absolute top-0 left-0 right-0 h-screen -z-10 pointer-events-none',
         active ? 'opacity-100' : 'opacity-0',
       )}
       aria-hidden="true"

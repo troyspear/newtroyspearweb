@@ -22,14 +22,33 @@ export default function SplineBackground({
       ? DARK_SCENE
       : LIGHT_SCENE,
   )
+  const currentSceneRef = useRef(initialScene)
+  const pendingSceneRef = useRef<string | null>(null)
+  const activeRef = useRef(active)
 
+  useEffect(() => {
+    activeRef.current = active
+  }, [active])
+
+  // Theme toggles swap the scene, but only while the background is actually
+  // showing (home route). Toggling the theme on another page just records the
+  // wanted scene; it loads when the user next lands on home.
   useEffect(() => {
     const observer = new MutationObserver(() => {
       const app = appRef.current
       if (!app) return
       const isDark = document.documentElement.classList.contains('dark')
       const nextScene = isDark ? DARK_SCENE : LIGHT_SCENE
-      app.load(nextScene).catch(() => {})
+      if (nextScene === currentSceneRef.current) {
+        pendingSceneRef.current = null
+        return
+      }
+      if (activeRef.current) {
+        currentSceneRef.current = nextScene
+        app.load(nextScene).catch(() => {})
+      } else {
+        pendingSceneRef.current = nextScene
+      }
     })
     observer.observe(document.documentElement, {
       attributes: true,
@@ -37,6 +56,17 @@ export default function SplineBackground({
     })
     return () => observer.disconnect()
   }, [])
+
+  useEffect(() => {
+    if (!active) return
+    const app = appRef.current
+    const pending = pendingSceneRef.current
+    if (app && pending && pending !== currentSceneRef.current) {
+      currentSceneRef.current = pending
+      pendingSceneRef.current = null
+      app.load(pending).catch(() => {})
+    }
+  }, [active])
 
   // Resume rendering only when this background is the active route (home),
   // in view, and the tab is visible - otherwise pause the render loop. The

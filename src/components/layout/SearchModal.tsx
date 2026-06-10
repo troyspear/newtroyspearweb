@@ -19,6 +19,7 @@ const STATIC_PAGES: SearchItem[] = [
   { title: 'Documentation', description: 'Build logs, test results, and design decisions', href: '/documentation', category: 'Pages' },
   { title: 'Sponsors', description: 'Our sponsors and supporters', href: '/sponsors', category: 'Pages' },
   { title: 'Gallery', description: 'Photos from competitions, pool tests, and build sessions', href: '/gallery', category: 'Pages' },
+  { title: 'Join', description: 'Join Troy SPEAR, no experience needed', href: '/join', category: 'Pages' },
   { title: 'Contact', description: 'Get in touch with Troy SPEAR', href: '/contact', category: 'Pages' },
   { title: 'Technical Design Reports', description: 'TDRs from past competition years', href: '/vehicle/tdrs', category: 'Pages' },
   { title: 'Past Vehicles', description: 'Krabby Patty, Aura, Sea++', href: '/vehicle/past/krabby-patty', category: 'Pages' },

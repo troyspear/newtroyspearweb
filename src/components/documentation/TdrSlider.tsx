@@ -48,7 +48,7 @@ export default function TdrSlider() {
       <div
         ref={scrollRef}
         onScroll={updateScrollState}
-        className="flex gap-6 overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-2 -mx-1 px-1"
+        className="flex gap-6 overflow-x-auto scrollbar-hide snap-x snap-mandatory pt-2 -mt-2 pb-2 -mx-1 px-1"
         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
       >
         {tdrs.map((tdr) => (

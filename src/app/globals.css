@@ -146,3 +146,12 @@ canvas + div {
 .animate-scroll:hover {
   animation-play-state: paused;
 }
+
+/* Sponsor marquee: drifts the opposite way from the updates banner, slower. */
+.animate-scroll-reverse {
+  animation: scroll 60s linear infinite reverse;
+}
+
+.animate-scroll-reverse:hover {
+  animation-play-state: paused;
+}

@@ -34,6 +34,14 @@ function shouldUseSpline() {
 export default function SplineBackgroundLoader({ active }: { active: boolean }) {
   const [useSpline, setUseSpline] = useState(false)
   const [shouldMountSpline, setShouldMountSpline] = useState(false)
+  const [hideFallback, setHideFallback] = useState(false)
+
+  // Once the Spline canvas has faded in (700ms transition), the gradient
+  // fallback is fully covered - stop rendering it so its blur layers don't
+  // keep animating on the GPU behind an opaque canvas.
+  const handleSplineReady = () => {
+    setTimeout(() => setHideFallback(true), 900)
+  }
 
   useEffect(() => {
     const check = () => setUseSpline(shouldUseSpline())
@@ -94,8 +102,12 @@ export default function SplineBackgroundLoader({ active }: { active: boolean }) 
       )}
       aria-hidden="true"
     >
-      <GradientFallback />
-      {useSpline && shouldMountSpline && <SplineBackground active={active} />}
+      {/* Only render the animated fallback on the home route - at opacity-0 on
+          other routes its blur layers would still composite and animate. */}
+      {active && !(hideFallback && useSpline) && <GradientFallback />}
+      {useSpline && shouldMountSpline && (
+        <SplineBackground active={active} onReady={handleSplineReady} />
+      )}
     </div>
   )
 }

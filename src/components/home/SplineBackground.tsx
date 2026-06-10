@@ -7,7 +7,13 @@ import type { Application } from '@splinetool/runtime'
 const LIGHT_SCENE = '/models/light-scene.splinecode'
 const DARK_SCENE = '/models/dark-scene.splinecode'
 
-export default function SplineBackground({ active }: { active: boolean }) {
+export default function SplineBackground({
+  active,
+  onReady,
+}: {
+  active: boolean
+  onReady?: () => void
+}) {
   const appRef = useRef<Application | null>(null)
   const containerRef = useRef<HTMLDivElement | null>(null)
   const [loaded, setLoaded] = useState(false)
@@ -33,7 +39,7 @@ export default function SplineBackground({ active }: { active: boolean }) {
   }, [])
 
   // Resume rendering only when this background is the active route (home),
-  // in view, and the tab is visible — otherwise pause the render loop. The
+  // in view, and the tab is visible - otherwise pause the render loop. The
   // component itself is never unmounted (it lives in the persistent shell),
   // so the WebGL context stays warm and returning home repaints instantly.
   useEffect(() => {
@@ -96,6 +102,7 @@ export default function SplineBackground({ active }: { active: boolean }) {
         onLoad={(app) => {
           appRef.current = app
           setLoaded(true)
+          onReady?.()
         }}
       />
     </div>

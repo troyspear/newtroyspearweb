@@ -15,6 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/documentation',
     '/sponsors',
     '/gallery',
+    '/join',
     '/contact',
   ].map((path) => ({
     url: `${SITE_URL}${path}`,

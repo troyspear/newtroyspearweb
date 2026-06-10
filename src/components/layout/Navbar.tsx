@@ -1,10 +1,14 @@
 'use client'
 
 import { useState, useEffect, useLayoutEffect, useRef, useSyncExternalStore } from 'react'
+import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Search, Menu, X, Moon, Sun, ChevronDown } from 'lucide-react'
-import MobileMenu from './MobileMenu'
+
+// Deferred so framer-motion stays out of the initial bundle - the chunk loads
+// in the background after hydration and is ready before the menu is opened.
+const MobileMenu = dynamic(() => import('./MobileMenu'), { ssr: false })
 
 function subscribeDark(callback: () => void) {
   const obs = new MutationObserver(callback)
@@ -34,6 +38,7 @@ const navLinks = [
   { href: '/documentation', label: 'Docs' },
   { href: '/sponsors', label: 'Sponsors' },
   { href: '/gallery', label: 'Gallery' },
+  { href: '/join', label: 'Join' },
   { href: '/contact', label: 'Contact' },
 ]
 

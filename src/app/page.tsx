@@ -3,12 +3,13 @@ import QuickLinks from '@/components/home/QuickLinks'
 import ScrollingBanner from '@/components/home/ScrollingBanner'
 import CompetitionCountdown from '@/components/home/CompetitionCountdown'
 import MissionSection from '@/components/home/MissionSection'
+import SponsorMarquee from '@/components/home/SponsorMarquee'
 
 export default function Home() {
   return (
     <>
       <ScrollingBanner />
-      {/* Transparent hero — the persistent Spline background (rendered in
+      {/* Transparent hero - the persistent Spline background (rendered in
           ClientShell, fixed behind everything) shows through here. */}
       <div className="relative pt-22">
         <HeroSection />
@@ -18,6 +19,7 @@ export default function Home() {
       <div className="relative bg-page">
         <QuickLinks />
         <MissionSection />
+        <SponsorMarquee />
         <CompetitionCountdown />
       </div>
     </>

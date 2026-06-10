@@ -29,7 +29,7 @@ export default function ScrollingBanner() {
   const viewportRef = useRef<HTMLDivElement>(null)
   const setRef = useRef<HTMLDivElement>(null)
   // Only loop (and therefore duplicate the posts) when a single set is wider
-  // than the bar — otherwise the posts would visibly appear twice.
+  // than the bar - otherwise the posts would visibly appear twice.
   const [scroll, setScroll] = useState(false)
 
   useEffect(() => {

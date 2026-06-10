@@ -74,7 +74,7 @@ export default function ContactPage() {
                 <p className="text-xs font-medium text-fg-muted uppercase tracking-wide mb-3">Social</p>
                 <div className="flex gap-3">
                   {[
-                    { icon: InstagramIcon, label: 'Instagram', href: 'https://www.instagram.com/troyspear' },
+                    { icon: InstagramIcon, label: 'Instagram', href: 'https://www.instagram.com/troy.spear' },
                     { icon: GithubIcon, label: 'GitHub', href: 'https://github.com/troyspear/' },
                     { icon: Mail, label: 'Email', href: 'mailto:contact@troyspear.org' },
                   ].map((social) => (

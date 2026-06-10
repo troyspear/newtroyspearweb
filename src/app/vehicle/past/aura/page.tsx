@@ -35,6 +35,21 @@ export default function AuraPage() {
             <GltfViewerLoader url="/models/aura.glb" />
           </div>
 
+          <div className="mt-12">
+            <h2 className="font-display text-sm font-medium text-fg-muted uppercase tracking-wide mb-4">
+              Competition Video
+            </h2>
+            <div className="relative aspect-video rounded-2xl overflow-hidden bg-surface border border-border-subtle">
+              <iframe
+                src="https://www.youtube.com/embed/_dAirzbanHQ"
+                title="Aura: RoboSub 2023-2024"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="absolute inset-0 w-full h-full"
+              />
+            </div>
+          </div>
+
           <div className="mt-12 p-8 rounded-2xl border border-border-subtle bg-surface/30">
             <p className="text-sm text-fg-muted text-center">
               Detailed vehicle specs and design documentation coming soon.

@@ -12,9 +12,9 @@ export const tdrs: Tdr[] = [
     year: '2025-2026',
     vehicle: 'ORCA',
     vehicleSlug: '/vehicle',
-    description: '',
-    pdfUrl: '',
-    upcoming: true,
+    description:
+      'Our latest AUV built for RoboSub 2025-2026. See the technical design report for the full system architecture, vision pipeline, and mission planning details.',
+    pdfUrl: '/documents/tdr-2026.pdf',
   },
   {
     year: '2024-2025',

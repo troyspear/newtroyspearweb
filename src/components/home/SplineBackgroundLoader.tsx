@@ -10,12 +10,16 @@ const SplineBackground = dynamic(() => import('./SplineBackground'), {
 
 const DESKTOP_BREAKPOINT = 768
 
-function GradientFallback() {
+function GradientFallback({ paused = false }: { paused?: boolean }) {
+  // ponytail: kill the per-frame blur animation while Spline inits so its
+  // shader compile + first frames don't fight these layers for the GPU. Still
+  // shows as a static backdrop. Upgrade path: none needed.
+  const anim = paused ? '' : 'animate-gradient-shift'
   return (
     <div className="absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
-      <div className="absolute inset-0 animate-gradient-shift bg-[length:200%_200%] bg-gradient-to-br from-[#2C6E4959] via-[#4C956C1F] to-[#14452F47] dark:from-accent/25 dark:via-accent/8 dark:to-accent/10" />
-      <div className="absolute top-[10%] left-[15%] w-48 h-48 rounded-full bg-[#2C6E4933] dark:bg-accent/15 blur-3xl animate-gradient-shift" />
-      <div className="absolute bottom-[20%] right-[10%] w-64 h-64 rounded-full bg-[#14452F29] dark:bg-accent/12 blur-3xl animate-gradient-shift [animation-delay:3s]" />
+      <div className={`absolute inset-0 ${anim} bg-[length:200%_200%] bg-gradient-to-br from-[#2C6E4959] via-[#4C956C1F] to-[#14452F47] dark:from-accent/25 dark:via-accent/8 dark:to-accent/10`} />
+      <div className={`absolute top-[10%] left-[15%] w-48 h-48 rounded-full bg-[#2C6E4933] dark:bg-accent/15 blur-3xl ${anim}`} />
+      <div className={`absolute bottom-[20%] right-[10%] w-64 h-64 rounded-full bg-[#14452F29] dark:bg-accent/12 blur-3xl ${anim} [animation-delay:3s]`} />
       <div className="absolute inset-0 bg-gradient-to-t from-page via-transparent to-page/80" />
     </div>
   )
@@ -34,14 +38,21 @@ function shouldUseSpline() {
 export default function SplineBackgroundLoader({ active }: { active: boolean }) {
   const [useSpline, setUseSpline] = useState(false)
   const [shouldMountSpline, setShouldMountSpline] = useState(false)
+  const [splineReady, setSplineReady] = useState(false)
   const [hideFallback, setHideFallback] = useState(false)
 
   // Once the Spline canvas has faded in (700ms transition), the gradient
   // fallback is fully covered - stop rendering it so its blur layers don't
   // keep animating on the GPU behind an opaque canvas.
   const handleSplineReady = () => {
+    setSplineReady(true)
     setTimeout(() => setHideFallback(true), 900)
   }
+
+  // Freeze the gradient's blur animation while Spline is mounting/loading -
+  // the heavy init window - so it isn't compositing every frame behind the
+  // canvas while shaders compile. Resumes nothing: Spline covers it on ready.
+  const initing = useSpline && shouldMountSpline && !splineReady
 
   useEffect(() => {
     const check = () => setUseSpline(shouldUseSpline())
@@ -104,7 +115,7 @@ export default function SplineBackgroundLoader({ active }: { active: boolean }) 
     >
       {/* Only render the animated fallback on the home route - at opacity-0 on
           other routes its blur layers would still composite and animate. */}
-      {active && !(hideFallback && useSpline) && <GradientFallback />}
+      {active && !(hideFallback && useSpline) && <GradientFallback paused={initing} />}
       {useSpline && shouldMountSpline && (
         <SplineBackground active={active} onReady={handleSplineReady} />
       )}

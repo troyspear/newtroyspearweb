@@ -131,6 +131,18 @@ export default function SplineBackground({
         style={{ width: '100%', height: 'calc(100% + 90px)' }}
         onLoad={(app) => {
           appRef.current = app
+          // ponytail: cap render DPR at 1.5 - on a 2x display that's ~44%
+          // fewer pixels shaded/frame for an abstract blurred bg nobody
+          // inspects pixel-for-pixel. Reaches a private (_renderer) field not
+          // in the public types, so guarded. Ceiling: breaks silently on a
+          // @splinetool/runtime bump. Upgrade path: set pixelRatioDesktop in
+          // the Spline editor export and delete this.
+          try {
+            const r = (app as unknown as {
+              _renderer?: { setPixelRatio?: (n: number) => void }
+            })._renderer
+            r?.setPixelRatio?.(Math.min(window.devicePixelRatio || 1, 1.5))
+          } catch {}
           setLoaded(true)
           onReady?.()
         }}

@@ -1,8 +1,7 @@
 import type { Metadata } from 'next'
 import { Wrench, CircuitBoard, Code2, MapPin, CalendarDays, ArrowRight, Mail } from 'lucide-react'
 
-// TODO: replace with the real Google Form URL when the application form is ready
-const JOIN_FORM_URL = 'https://forms.gle/REPLACE_ME'
+const JOIN_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSccxyF23QrHLtUUgHqyYgyZaev3ofNF-xHwerrnuxodFPVRdA/viewform?usp=publish-editor'
 
 export const metadata: Metadata = {
   title: 'Join',

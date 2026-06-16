@@ -60,7 +60,7 @@ export default function JoinPage() {
           </h1>
           <p className="mt-3 text-sm text-fg-muted max-w-lg leading-relaxed">
             We build autonomous submarines and compete at RoboSub. No prior experience required.
-            We look for commitment and a willingness to learn. Open to all Troy High School students.
+            We look for commitment and a willingness to learn. Open to all NJROTC cadets.
           </p>
 
           <div className="mt-14 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
@@ -125,7 +125,7 @@ export default function JoinPage() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 text-sm font-semibold text-page bg-accent hover:bg-accent/85 px-5 py-2.5 rounded-lg transition-all"
                 >
-                  Apply via Google Form
+                  Interest Form
                   <ArrowRight className="w-3.5 h-3.5" />
                 </a>
                 <p className="mt-4 text-xs text-fg-muted">

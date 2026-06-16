@@ -85,7 +85,6 @@ export function useLazyCanvas() {
     containerRef,
     shouldMount,
     autoRotating,
-    rendering,
     frameloop,
     dpr,
     handleStart,

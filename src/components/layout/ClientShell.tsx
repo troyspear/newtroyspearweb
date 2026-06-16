@@ -7,8 +7,8 @@ import Navbar from './Navbar'
 import Footer from './Footer'
 import SplineBackgroundLoader from '@/components/home/SplineBackgroundLoader'
 
-// Deferred so fuse.js, framer-motion, and the search index stay out of the
-// initial bundle - the chunk is only fetched the first time search is opened.
+// Deferred so framer-motion and the search index stay out of the initial
+// bundle - the chunk is only fetched the first time search is opened.
 const SearchModal = dynamic(() => import('./SearchModal'), { ssr: false })
 
 export default function ClientShell({ children }: { children: React.ReactNode }) {

@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react'
-import { Search, X, FileText, Users, Wrench, Image as ImageIcon, BookOpen, Heart } from 'lucide-react'
+import { Search, X, FileText, Users, Wrench, BookOpen, Heart } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 
@@ -102,42 +102,46 @@ const categoryIcons: Record<string, typeof Search> = {
   Docs: BookOpen,
   Team: Users,
   Vehicle: Wrench,
-  Gallery: ImageIcon,
   Sponsors: Heart,
+}
+
+// ponytail: substring match scored by field + prefix, replacing fuse.js for a
+// ~40-item static index. No typo tolerance; add fuse.js back if users miss it.
+function scoreItem(item: SearchItem, q: string): number {
+  const t = item.title.toLowerCase()
+  if (t.includes(q)) return t.startsWith(q) ? 3 : 2
+  if (item.description.toLowerCase().includes(q)) return 1.5
+  if (item.category.toLowerCase().includes(q)) return 0.5
+  return 0
 }
 
 export default function SearchModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
   const [query, setQuery] = useState('')
   const [searchData, setSearchData] = useState<SearchItem[]>(STATIC_PAGES)
-  const [fuseInstance, setFuseInstance] = useState<import('fuse.js').default<SearchItem> | null>(null)
+  const [loaded, setLoaded] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
-    if (!isOpen || fuseInstance) return
+    if (!isOpen || loaded) return
     let cancelled = false
-    Promise.all([import('fuse.js'), buildSearchData()]).then(([mod, items]) => {
+    buildSearchData().then((items) => {
       if (cancelled) return
-      const Fuse = mod.default
       setSearchData(items)
-      setFuseInstance(new Fuse(items, {
-        keys: [
-          { name: 'title', weight: 2 },
-          { name: 'description', weight: 1.5 },
-          { name: 'category', weight: 0.5 },
-        ],
-        threshold: 0.4,
-        ignoreLocation: true,
-        minMatchCharLength: 2,
-      }))
+      setLoaded(true)
     })
     return () => { cancelled = true }
-  }, [isOpen, fuseInstance])
+  }, [isOpen, loaded])
 
   const results = useMemo(() => {
-    if (query.length === 0) return searchData.slice(0, 6)
-    if (!fuseInstance) return []
-    return fuseInstance.search(query).slice(0, 10).map((r) => r.item)
-  }, [query, fuseInstance, searchData])
+    const q = query.trim().toLowerCase()
+    if (q.length === 0) return searchData.slice(0, 6)
+    return searchData
+      .map((item) => ({ item, score: scoreItem(item, q) }))
+      .filter((r) => r.score > 0)
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 10)
+      .map((r) => r.item)
+  }, [query, searchData])
 
   const grouped = useMemo(() => {
     return results.reduce<Record<string, SearchItem[]>>((acc, item) => {

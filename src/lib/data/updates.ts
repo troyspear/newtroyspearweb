@@ -18,4 +18,16 @@ export const updates: Update[] = [
     date: '2026-05-23',
     slug: 'camera-latency-tensorrt',
   },
+  {
+    id: '4',
+    title: 'DROPPER: From First Prototype to Final Design',
+    date: '2026-05-20',
+    slug: 'dropper-development',
+  },
+  {
+    id: '3',
+    title: 'CLAW: Initial Brainstorming',
+    date: '2026-04-10',
+    slug: 'claw-initial-brainstorming',
+  },
 ]

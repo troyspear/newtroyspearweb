@@ -40,7 +40,7 @@ function MediaPlaceholder({ item }: { item: BlogMedia }) {
             alt={item.alt}
             width={800}
             height={450}
-            className="w-full h-auto rounded-xl border border-border-subtle"
+            className="mx-auto h-auto w-auto max-h-96 rounded-xl border border-border-subtle"
             sizes="(max-width: 672px) 100vw, 672px"
           />
         )}

@@ -1,10 +1,5 @@
 import type { Metadata } from 'next'
-import SpecsTable from '@/components/vehicle/SpecsTable'
 import SubmarineViewerLoader from '@/components/vehicle/SubmarineViewerLoader'
-import { subsystems } from '@/lib/data/vehicle-specs'
-import { Zap, Eye, Cpu, Box } from 'lucide-react'
-
-const iconMap: Record<string, typeof Zap> = { zap: Zap, eye: Eye, cpu: Cpu, box: Box }
 
 export const metadata: Metadata = {
   title: 'Vehicle',
@@ -45,32 +40,6 @@ export default function VehiclePage() {
               loading="lazy"
               className="absolute inset-0 w-full h-full"
             />
-          </div>
-        </div>
-      </section>
-
-      <section className="px-5 sm:px-8 py-16 border-t border-border-subtle">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16">
-          <SpecsTable />
-
-          <div>
-            <h3 className="font-display text-sm font-medium text-fg-muted uppercase tracking-wide mb-6" id="propulsion">
-              Subsystems
-            </h3>
-            <div className="space-y-5">
-              {subsystems.map((sys) => {
-                const Icon = iconMap[sys.icon] || Box
-                return (
-                  <div key={sys.name} className="flex gap-3" id={sys.name.toLowerCase()}>
-                    <Icon className="w-4 h-4 text-fg-muted mt-0.5 shrink-0" />
-                    <div>
-                      <h4 className="text-sm font-medium text-fg">{sys.name}</h4>
-                      <p className="text-xs text-fg-muted mt-0.5 leading-relaxed">{sys.description}</p>
-                    </div>
-                  </div>
-                )
-              })}
-            </div>
           </div>
         </div>
       </section>

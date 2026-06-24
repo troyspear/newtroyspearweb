@@ -29,12 +29,10 @@ async function buildSearchData(): Promise<SearchItem[]> {
   const [
     { blogPosts },
     { teamMembers, subTeams },
-    { vehicleSpecs, subsystems },
     { sponsors },
   ] = await Promise.all([
     import('@/lib/data/blog-posts'),
     import('@/lib/data/team-members'),
-    import('@/lib/data/vehicle-specs'),
     import('@/lib/data/sponsors'),
   ])
 
@@ -64,24 +62,6 @@ async function buildSearchData(): Promise<SearchItem[]> {
       description: team.description,
       href: '/about',
       category: 'Team',
-    })
-  }
-
-  for (const sub of subsystems) {
-    items.push({
-      title: sub.name,
-      description: sub.description,
-      href: '/vehicle',
-      category: 'Vehicle',
-    })
-  }
-
-  for (const spec of vehicleSpecs) {
-    items.push({
-      title: spec.label,
-      description: spec.value,
-      href: '/vehicle#specs',
-      category: 'Vehicle',
     })
   }
 

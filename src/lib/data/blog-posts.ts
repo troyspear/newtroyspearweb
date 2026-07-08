@@ -18,46 +18,50 @@ export interface BlogMedia {
 
 export const blogPosts: BlogPost[] = [
 	{
+		slug: "placeholder-update",
+		title: "Placeholder: Lorem Ipsum Blog Post",
+		date: "2026-07-08",
+		category: "build",
+		summary:
+			"A placeholder blog post used to pad the scrolling marquee on wide desktop viewports. Replace with real content later.",
+		thumbnail: "/images/vehicle/placeholder-sub-1.jpg",
+		content: `## Placeholder Heading
+
+This is placeholder content. Replace it with a real update when ready.
+
+- Lorem ipsum dolor sit amet
+- Consectetur adipiscing elit
+- Sed do eiusmod tempor incididunt`,
+	},
+	{
 		slug: "orca-first-pool-trials",
-		title: "ORCA Hits the Water: First Pool Trials",
+		title: "ORCA Back in the Water: Second Pool Trials",
 		date: "2026-07-07",
 		category: "testing",
 		summary:
-			"ORCA's first in-water test session — validating watertightness, thrust response, and the vision pipeline against real pool lighting before open-water runs.",
+			"ORCA's second in-water test: leak checks and movement scripts go smoothly until a misaligned Pixhawk and ZED 2i send the sub into the floor, and an overtightened kill switch lets water into the battery compartment.",
 		thumbnail: "/images/pool.jpeg",
 		media: [
 			{
 				type: "image",
 				src: "/images/pool.jpeg",
-				alt: "ORCA in the pool during its first water trials",
-				caption: "ORCA during its first pool trial (7 Jul 2026)",
+				alt: "ORCA in the pool during its second water trials",
+				caption: "ORCA during its second pool trial (7 Jul 2026)",
 			},
 		],
-		content: `## First Splash
+		content: `## Back in the Water
 
-ORCA finally met the water. After months of CAD, machining, and bench testing on dry land, we ran the vehicle through its first full pool session to find out what works on paper and what only works on paper.
+Today, we water-tested the sub again. We tested the sub for any leaks, along with scripts that tested the sub's movement, such as depth holding, forward movement, strafing, and more. When we put the sub into the water, there were no signs of leakage, which was great. A script that made the sub surge forward was run, but something unexpected happened: the sub moved downward and to the left, crashing into the ground. We hurriedly pulled the sub out of the water to check for any leaks, and to our dismay, there was some minor leakage in the battery compartment. Some of our members were dispatched to retrieve isopropyl alcohol, tissue paper, and a screwdriver kit to debug and find out how severe the damage was. We found that water had leaked into the kill switch, which made its light stop working; however, the kill switch still worked. The cause was the kill switch being screwed too tightly, so our precautionary measures ended up backfiring. The cause of the sub's movement going awry was the Pixhawk and ZED 2i stereo camera being misaligned. These two devices contain important position-tracking sensors, so if the sensors were misaligned, the sub would be misaligned as well.
 
-## Test Plan
+## Fixing the Leak
 
-We broke the session into three passes, each building on the last:
+To fix this, we decided to first coat the kill switch in a layer of Gorilla epoxy and let it cure for about 12 hours. Once the first layer is roughly set, another layer of JB Weld epoxy will be added on top.
 
-1. **Watertightness** — power on, sit on the bottom for five minutes, then surface and inspect every seal.
-2. **Thrust and control** — verify each thruster's direction and response, then tune PID gains for depth and heading hold.
-3. **Vision** — run the TensorRT pipeline against the pool's lane markers and targets under real lighting.
-
-## What We Learned
-
-The hull held — no leaks across all four seal inspections, and the new gland routing for the tether held up under tension. Thrust mapping was close to simulation, though the vertical thrusters needed a small bias to counter the slightly positive buoyancy we measured.
-
-## Vision Underwater
-
-Real pool lighting was the biggest unknown. The TensorRT model ran at a steady 58 fps at 720p, and detection confidence on lane markers stayed above the threshold even with surface glare. We still need to tune exposure for the deep end, where the blue tiles drop the contrast noticeably.
+To fix the misaligned sensors, we are also printing a new electrical tray. The tray will house all our components, from the Jetson Orin Nano to the Pixhawk.
 
 ## Next Steps
 
-- Re-ballast for neutral buoyancy
-- Add a glare-robust exposure schedule
-- Repeat the full mission task list end-to-end`,
+Hopefully, next time we are able to properly test our software code and not be held back by electrical and mechanical bugs.`,
 	},
 	{
 		slug: "behavior-tree-sequencing",

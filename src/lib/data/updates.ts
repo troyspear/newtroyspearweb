@@ -7,8 +7,14 @@ export interface Update {
 
 export const updates: Update[] = [
 	{
+		id: "6",
+		title: "Placeholder: Lorem Ipsum Blog Post",
+		date: "2026-07-08",
+		slug: "placeholder-update",
+	},
+	{
 		id: "5",
-		title: "ORCA Hits the Water: First Pool Trials",
+		title: "ORCA Back in the Water: Second Pool Trials",
 		date: "2026-07-07",
 		slug: "orca-first-pool-trials",
 	},

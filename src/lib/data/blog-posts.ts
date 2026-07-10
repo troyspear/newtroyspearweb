@@ -18,22 +18,6 @@ export interface BlogMedia {
 
 export const blogPosts: BlogPost[] = [
 	{
-		slug: "placeholder-update",
-		title: "Placeholder: Lorem Ipsum Blog Post",
-		date: "2026-07-08",
-		category: "build",
-		summary:
-			"A placeholder blog post used to pad the scrolling marquee on wide desktop viewports. Replace with real content later.",
-		thumbnail: "/images/vehicle/placeholder-sub-1.jpg",
-		content: `## Placeholder Heading
-
-This is placeholder content. Replace it with a real update when ready.
-
-- Lorem ipsum dolor sit amet
-- Consectetur adipiscing elit
-- Sed do eiusmod tempor incididunt`,
-	},
-	{
 		slug: "orca-first-pool-trials",
 		title: "ORCA Back in the Water: Second Pool Trials",
 		date: "2026-07-07",

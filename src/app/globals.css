@@ -105,9 +105,10 @@ textarea:focus-visible {
   display: none;
 }
 
-/* Hide Spline watermark */
+/* Hide Spline watermark. Scoped to the Spline host: an unscoped
+   `canvas + div` hides any div that happens to follow a canvas. */
 .spline-watermark,
-canvas + div {
+.spline-host canvas + div {
   display: none !important;
 }
 

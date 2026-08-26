@@ -118,7 +118,7 @@ export default function SplineBackground({
   return (
     <div
       ref={containerRef}
-      className="absolute inset-0 z-0 overflow-hidden transition-opacity duration-700"
+      className="spline-host absolute inset-0 z-0 overflow-hidden transition-opacity duration-200"
       style={{ opacity: loaded ? 1 : 0 }}
       aria-hidden="true"
     >

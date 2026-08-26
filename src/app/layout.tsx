@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
+import ThemeScript from '@/components/layout/ThemeScript'
 import ClientShell from '@/components/layout/ClientShell'
 import { SITE_URL } from '@/lib/site'
 import './globals.css'
@@ -27,8 +28,6 @@ export const metadata: Metadata = {
   },
 }
 
-const themeScript = `(function(){try{var t=localStorage.getItem('theme');var d=t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme:dark)').matches);document.documentElement.classList.toggle('dark',d);document.documentElement.style.colorScheme=d?'dark':'light';if(location.pathname!=='/')return;var w=window.matchMedia('(min-width:768px)').matches;var rm=window.matchMedia('(prefers-reduced-motion:reduce)').matches;var sd=navigator.connection&&navigator.connection.saveData;if(w&&!rm&&!sd){var l=document.createElement('link');l.rel='preload';l.as='fetch';l.crossOrigin='anonymous';l.href=d?'/models/dark-scene.splinecode':'/models/light-scene.splinecode';document.head.appendChild(l)}}catch(e){}})()`;
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -36,9 +35,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`h-full antialiased ${nbInternational.variable}`} data-scroll-behavior="smooth" suppressHydrationWarning>
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
-      </head>
+      <ThemeScript />
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
         <a
           href="#main-content"

@@ -1,7 +1,7 @@
 import HeroSection from '@/components/home/HeroSection'
 import QuickLinks from '@/components/home/QuickLinks'
 import ScrollingBanner from '@/components/home/ScrollingBanner'
-import CompetitionCountdown from '@/components/home/CompetitionCountdown'
+import CompetitionCongrats from '@/components/home/CompetitionCongrats'
 import MissionSection from '@/components/home/MissionSection'
 import SponsorMarquee from '@/components/home/SponsorMarquee'
 
@@ -20,7 +20,7 @@ export default function Home() {
         <QuickLinks />
         <MissionSection />
         <SponsorMarquee />
-        <CompetitionCountdown />
+        <CompetitionCongrats />
       </div>
     </>
   )

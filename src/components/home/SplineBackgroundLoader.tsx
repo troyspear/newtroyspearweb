@@ -4,7 +4,9 @@ import { useState, useEffect } from 'react'
 import dynamic from 'next/dynamic'
 import { cn } from '@/lib/utils'
 
-const SplineBackground = dynamic(() => import('./SplineBackground'), {
+const importSpline = () => import('./SplineBackground')
+
+const SplineBackground = dynamic(importSpline, {
   ssr: false,
 })
 
@@ -35,73 +37,44 @@ function shouldUseSpline() {
   return true
 }
 
+// Warm the Spline chunk during client-bundle evaluation instead of waiting for
+// hydration + the first effect. The @splinetool runtime download then overlaps
+// hydration, and by the time we render the component the module is already in
+// webpack's cache, so mounting is synchronous. Gated on the home route so other
+// pages never pay for a background they don't show; the scene bytes themselves
+// are already preloaded by the inline script in layout.tsx.
+if (typeof window !== 'undefined' && window.location.pathname === '/' && shouldUseSpline()) {
+  void importSpline()
+}
+
 export default function SplineBackgroundLoader({ active }: { active: boolean }) {
-  const [useSpline, setUseSpline] = useState(false)
-  const [shouldMountSpline, setShouldMountSpline] = useState(false)
+  // Lazy initializer, not an effect: the decision is available on the very
+  // first client render, saving a render + commit round trip before the
+  // canvas mounts. SSR renders false and the dynamic component's fallback is
+  // null, so the hydrated DOM still matches.
+  const [useSpline, setUseSpline] = useState(shouldUseSpline)
   const [splineReady, setSplineReady] = useState(false)
   const [hideFallback, setHideFallback] = useState(false)
 
-  // Once the Spline canvas has faded in (700ms transition), the gradient
+  // Once the Spline canvas has faded in (200ms transition), the gradient
   // fallback is fully covered - stop rendering it so its blur layers don't
   // keep animating on the GPU behind an opaque canvas.
   const handleSplineReady = () => {
     setSplineReady(true)
-    setTimeout(() => setHideFallback(true), 900)
+    setTimeout(() => setHideFallback(true), 250)
   }
 
-  // Freeze the gradient's blur animation while Spline is mounting/loading -
-  // the heavy init window - so it isn't compositing every frame behind the
-  // canvas while shaders compile. Resumes nothing: Spline covers it on ready.
-  const initing = useSpline && shouldMountSpline && !splineReady
+  // Freeze the gradient's blur animation while Spline is loading - the heavy
+  // init window - so it isn't compositing every frame behind the canvas while
+  // shaders compile. Resumes nothing: Spline covers it on ready.
+  const initing = useSpline && !splineReady
 
+  // Resize only: the initial value comes from the lazy initializer above.
   useEffect(() => {
     const check = () => setUseSpline(shouldUseSpline())
-    check()
     window.addEventListener('resize', check)
     return () => window.removeEventListener('resize', check)
   }, [])
-
-  useEffect(() => {
-    if (!useSpline) return
-
-    let cancelled = false
-    let idleHandle: number | undefined
-    let timeoutHandle: ReturnType<typeof setTimeout> | undefined
-
-    const schedule = () => {
-      if (cancelled) return
-      const ric = (window as Window & {
-        requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number
-      }).requestIdleCallback
-      if (ric) {
-        idleHandle = ric(() => {
-          if (!cancelled) setShouldMountSpline(true)
-        }, { timeout: 1500 })
-      } else {
-        timeoutHandle = setTimeout(() => {
-          if (!cancelled) setShouldMountSpline(true)
-        }, 400)
-      }
-    }
-
-    if (document.readyState === 'complete') {
-      schedule()
-    } else {
-      window.addEventListener('load', schedule, { once: true })
-    }
-
-    return () => {
-      cancelled = true
-      window.removeEventListener('load', schedule)
-      if (idleHandle !== undefined) {
-        const cic = (window as Window & {
-          cancelIdleCallback?: (handle: number) => void
-        }).cancelIdleCallback
-        cic?.(idleHandle)
-      }
-      if (timeoutHandle) clearTimeout(timeoutHandle)
-    }
-  }, [useSpline])
 
   return (
     <div
@@ -116,7 +89,7 @@ export default function SplineBackgroundLoader({ active }: { active: boolean }) 
       {/* Only render the animated fallback on the home route - at opacity-0 on
           other routes its blur layers would still composite and animate. */}
       {active && !(hideFallback && useSpline) && <GradientFallback paused={initing} />}
-      {useSpline && shouldMountSpline && (
+      {useSpline && (
         <SplineBackground active={active} onReady={handleSplineReady} />
       )}
     </div>

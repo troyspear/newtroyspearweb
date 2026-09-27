@@ -40,8 +40,8 @@ export default async function TeamYearPage({ params }: { params: Promise<{ year:
                   href={`/about/${y}`}
                   className={
                     isActive
-                      ? 'px-3 py-1.5 rounded-full text-xs font-medium bg-accent text-page'
-                      : 'px-3 py-1.5 rounded-full text-xs font-medium bg-surface border border-border-subtle text-fg-muted hover:text-fg hover:border-accent/40 transition-colors'
+                      ? 'px-3.5 py-1.5 rounded-full text-sm font-medium bg-accent text-page'
+                      : 'px-3.5 py-1.5 rounded-full text-sm font-medium bg-elevated border border-border text-fg-secondary hover:text-fg hover:border-accent/40 transition-colors'
                   }
                 >
                   {y}

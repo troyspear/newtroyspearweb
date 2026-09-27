@@ -61,7 +61,7 @@ export default function SponsorsPage() {
                           alt={sponsor.name}
                           width={160}
                           height={60}
-                          className={`object-contain max-w-full transition-transform ${config.logoSize}`}
+                          className={`w-auto object-contain max-w-full transition-transform ${config.logoSize}`}
                           sizes="(max-width: 640px) 40vw, (max-width: 1024px) 28vw, 160px"
                         />
                       </a>
@@ -89,7 +89,7 @@ export default function SponsorsPage() {
                 <div key={stat.label} className="text-center p-4 rounded-xl bg-page/50">
                   <stat.icon className="w-4 h-4 text-accent mx-auto mb-2" />
                   <p className="font-display text-xl font-semibold text-fg">{stat.value}</p>
-                  <p className="text-[11px] text-fg-muted mt-0.5">{stat.label}</p>
+                  <p className="text-xs text-fg-muted mt-0.5">{stat.label}</p>
                 </div>
               ))}
             </div>

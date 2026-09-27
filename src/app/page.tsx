@@ -3,6 +3,7 @@ import QuickLinks from '@/components/home/QuickLinks'
 import ScrollingBanner from '@/components/home/ScrollingBanner'
 import CompetitionCongrats from '@/components/home/CompetitionCongrats'
 import MissionSection from '@/components/home/MissionSection'
+import CompetitionSection from '@/components/home/CompetitionSection'
 import SponsorMarquee from '@/components/home/SponsorMarquee'
 
 export default function Home() {
@@ -19,6 +20,7 @@ export default function Home() {
       <div className="relative bg-page">
         <QuickLinks />
         <MissionSection />
+        <CompetitionSection />
         <SponsorMarquee />
         <CompetitionCongrats />
       </div>

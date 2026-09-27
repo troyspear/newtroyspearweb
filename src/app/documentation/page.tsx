@@ -15,7 +15,7 @@ export default function DocumentationPage() {
           <h1 className="font-display text-2xl sm:text-3xl font-light text-fg tracking-tight">
             Documentation
           </h1>
-          <p className="mt-3 text-sm text-fg-muted max-w-lg">
+          <p className="mt-3 text-base text-fg-secondary max-w-2xl">
             Updates, build logs, test summaries, and formal technical design reports.
           </p>
 
@@ -32,9 +32,7 @@ export default function DocumentationPage() {
             <h2 className="font-display text-xs font-semibold text-accent uppercase tracking-wider mb-6">
               Updates
             </h2>
-            <div className="max-w-3xl">
-              <BlogList />
-            </div>
+            <BlogList />
           </div>
         </div>
       </section>

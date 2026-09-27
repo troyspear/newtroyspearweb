@@ -13,7 +13,7 @@ export const tdrs: Tdr[] = [
     vehicle: 'ORCA',
     vehicleSlug: '/vehicle',
     description:
-      'Our latest AUV built for RoboSub 2025-2026. See the technical design report for the full system architecture, vision pipeline, and mission planning details.',
+      'Compliant PLA/TPU claw, two-barrel dropper, self-propelled electric torpedo, 555-timer precharged power board, dual ZED 2i cameras, and a ROS 2 stack with YOLO26 detection.',
     pdfUrl: '/documents/tdr-2026.pdf',
   },
   {

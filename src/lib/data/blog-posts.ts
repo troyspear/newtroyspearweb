@@ -54,19 +54,13 @@ Hopefully, next time we are able to properly test our software code and not be h
 		category: "design",
 		summary:
 			"Finalizing our behavior tree sequencing against the competition task descriptions, cleaning up the workspace, and testing the camera against last year's model.",
-		thumbnail: "/images/vehicle/placeholder-sub-1.jpg",
+		thumbnail: "/images/vehicle/orca/software-stack.png",
 		media: [
 			{
 				type: "image",
-				src: "",
-				alt: "Current behavior tree structure",
-				caption: "Our current behavior tree (placeholder)",
-			},
-			{
-				type: "image",
-				src: "",
-				alt: "Camera running last year's model",
-				caption: "Camera tested with last year's model (placeholder)",
+				src: "/images/vehicle/orca/software-stack.png",
+				alt: "ORCA software stack showing the behavior tree between vision, localization, and control",
+				caption: "Where the behavior tree sits in ORCA's software stack",
 			},
 		],
 		content: `Today, we worked on finalizing our behavior tree sequencing and structure, cleaning up our old workspace, and testing our camera with an old model. Our behavior tree structure was mostly finalized, though we decided to go through the competition task descriptions to make sure everything was correctly implemented. We found that some aspects of our behavior tree structure were sequenced incorrectly and tailored for parts that weren't included in this year's sub. For example, we changed the ordering of the sequencing so that the sub would initialize first, creating a more sensible ordering. Another thing we changed was removing unnecessary checks and conditions. Lastly, we removed conditions involving hydrophones, which we do not plan on utilizing in this year's sub.\n\n## Cleaning Up and Testing the Camera\n\nWe also cleaned up our old workspace so everything was more organized and reflective of this year's competition. Moreover, we also tested our camera with last year's model, just to make sure the model worked smoothly with our current pipeline.`,
@@ -78,34 +72,8 @@ Hopefully, next time we are able to properly test our software code and not be h
 		category: "build",
 		summary:
 			"Tackling the camera lag that dropped us from a target of 720p @ 60 fps down to 0.5 fps, and why we moved our model runtime from ONNX to TensorRT on the Jetson Orin Nano.",
-		thumbnail: "/images/vehicle/placeholder-sub-1.jpg",
-		media: [
-			{
-				type: "image",
-				src: "",
-				alt: "Camera feed and inference latency comparison before and after TensorRT migration",
-				caption: "Camera + inference latency, ONNX vs. TensorRT (placeholder)",
-			},
-		],
+		thumbnail: "/images/vehicle/orca/main-compartment.png",
 		content: `## Overview\n\nToday, we worked on fixing the high latency issue of the camera and implementing localization. The camera is supposed to run at 720p @ 60 fps, but in practice, it was running much slower, at around 0.5 fps.\n\n## Diagnosing the Lag\n\nTo diagnose the problem causing the lag, we went through two main components:\n\n- The runtime of the model\n- The model itself\n\n## Switching from ONNX to TensorRT\n\nThe previous runtime for the model was ONNX, which was chosen because it provided a standardized file format we could run anywhere. We had used ONNX in previous years because of its ease of use, accessibility, and its compatibility with our software stack.\n\nHowever, due to the limited compute power the Jetson Orin Nano has, our main processing unit, we decided to switch over to TensorRT. TensorRT is a runtime, like ONNX, but optimized for inference speed and throughput, which is ideal for our situation.`,
-	},
-	{
-		slug: "claw-initial-brainstorming",
-		title: "CLAW: Initial Brainstorming",
-		date: "2026-04-10",
-		category: "design",
-		summary:
-			"Early brainstorming and sketches for CLAW. Rough ideas for now, to be elaborated later.",
-		thumbnail: "/images/vehicle/placeholder-sub-1.jpg",
-		media: [
-			{
-				type: "image",
-				src: "",
-				alt: "CLAW initial sketches",
-				caption: "Initial sketches (placeholder)",
-			},
-		],
-		content: `## Brainstorming\n\nBrief ideas for now, to be elaborated later.\n\n- Initial brainstorming\n- Sketches`,
 	},
 	{
 		slug: "dropper-development",
@@ -142,6 +110,36 @@ Hopefully, next time we are able to properly test our software code and not be h
 			},
 		],
 		content: `## Iterations\n\n**17 Apr 2026 — v1.** First rough prototype created. Diameter was 38mm.\n\n**1 May 2026.** Printed and tested; the fins broke off and the body was not dense enough.\n\n**7 May 2026 — v2.** Experimental teardrop shape, two halves printed sideways and connected with 3D-printed pins. Proved ineffective due to lack of fins. Added one 14mm steel bearing for density and reduced the diameter to 20mm.\n\n**10 May 2026 — v3.** Added helical fins (also experimental). Used two 14mm steel bearings in the lower part and a two-part assembly held together with one-way connections. Size increased to 28mm diameter for a 30mm barrel.\n\n**16 May 2026 — v4.** Helical fins moved to the back after a better understanding of the dynamics.\n\n**20 May 2026 — v5 (final).** Switched to straight fins that screw in, allowing for easy fin changes.\n\n## New Testing Method\n\nWe built a stand out of PVC tubes weighed down with bricks, with a mount for the dropper that adjusts for each hole and centers onto the target.\n\nThe target used 50cm-increment circles out to 250cm diameter:\n\n- 50cm — orange\n- 150cm — red\n- 250cm — white\n\nThe dropper was released by hand via actuation of the obstruction block and allowed to drop with minimal disturbance in the water by a diver.\n\n## Results\n\nOut of 10 trials: 7 orange, 2 red, and 1 between red and orange. Average deviation was 25mm–75mm.`,
+	},
+	{
+		slug: "claw-initial-brainstorming",
+		title: "CLAW: From Brainstorming to a Compliant Design",
+		date: "2026-04-10",
+		category: "design",
+		summary:
+			"Why last year's claw couldn't hold on, the ideas we considered (TPU bristles, a worm gear), and how we landed on a hybrid PLA + TPU compliant claw with a double-joint linkage.",
+		thumbnail: "/images/vehicle/orca/claw-assembly.png",
+		media: [
+			{
+				type: "image",
+				src: "/images/vehicle/orca/claw-assembly.png",
+				alt: "CAD render of the full ORCA claw assembly",
+				caption: "Full claw assembly: gear train, double-joint linkage, and compliant fingers",
+			},
+			{
+				type: "image",
+				src: "/images/vehicle/orca/claw-compliant.png",
+				alt: "Close-up of a compliant TPU claw finger",
+				caption: "Compliant TPU finger",
+			},
+			{
+				type: "image",
+				src: "/images/vehicle/orca/claw-gearing.png",
+				alt: "Four-gear series train with an idler gear",
+				caption: "Series gear train with an idler gear",
+			},
+		],
+		content: `## The Problem\n\nOur 2025 claw used a series gear system at a 1:1 ratio, and it did not reliably transfer enough torque to grip objects. We tried cutting an arc-shaped space in the middle of the claw with interlocking teeth on the bottom, but that only reduced surface contact without fixing the grip.\n\n## Ideas We Considered\n\n- **TPU bristles.** Flexible, rubber-like bristles would fully conform around an object. In practice they are hard to print successfully and waste a lot of TPU as support material.\n- **Compliant fingers.** A compliant TPU attachment on a rigid PLA structure is easier to make and test, which means faster prototyping and simpler assembly.\n- **Worm gear.** Would multiply torque, but it didn't work within the rotational limits of our servo.\n\n## Where We Landed\n\nWe chose a hybrid compliant claw: PLA for structure and rigidity, TPU for the fingers that touch the object. We kept last year's four-bar "double-joint" linkage so the fingers stay parallel as they close.\n\nFor gearing, we use a four-gear series train with an idler gear so the two arms rotate in opposite directions. The gear plate is fastened to the face of the servo, with a circular cutout so the servo sits flush and countersunk holes so the nuts don't interfere with mounting.\n\n## Next Steps\n\nStrength testing (add 1 lb at a time until the claw lets go, on land and underwater) and shape testing (circle, square, hoop, handle, and hexagon).`,
 	},
 ];
 

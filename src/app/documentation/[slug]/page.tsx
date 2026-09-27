@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowLeft, Calendar, ImageIcon, Play } from 'lucide-react'
+import { ArrowLeft, Calendar } from 'lucide-react'
 import { blogPosts, categoryLabels, type BlogMedia } from '@/lib/data/blog-posts'
 
 export function generateStaticParams() {
@@ -19,7 +19,7 @@ export function generateMetadata({ params }: { params: Promise<{ slug: string }>
   })
 }
 
-function MediaPlaceholder({ item }: { item: BlogMedia }) {
+function BlogMediaItem({ item }: { item: BlogMedia }) {
   if (item.src) {
     return (
       <figure className="my-6">
@@ -51,22 +51,21 @@ function MediaPlaceholder({ item }: { item: BlogMedia }) {
     )
   }
 
+  return null
+}
+
+/** Renders **bold** runs inside a paragraph or list item. */
+function Inline({ text }: { text: string }) {
   return (
-    <figure className="my-6">
-      <div className="relative aspect-video rounded-xl bg-surface border border-border-subtle flex flex-col items-center justify-center gap-2">
-        {item.type === 'video' ? (
-          <div className="w-10 h-10 rounded-full bg-accent/10 border border-accent/20 flex items-center justify-center">
-            <Play className="w-4 h-4 text-accent" aria-hidden="true" />
-          </div>
+    <>
+      {text.split(/(\*\*[^*]+\*\*)/).map((part, i) =>
+        part.startsWith('**') && part.endsWith('**') ? (
+          <strong key={i} className="font-semibold text-fg">{part.slice(2, -2)}</strong>
         ) : (
-          <ImageIcon className="w-6 h-6 text-fg-muted" aria-hidden="true" />
-        )}
-        <p className="text-xs text-fg-muted px-4 text-center">{item.alt}</p>
-      </div>
-      {item.caption && (
-        <figcaption className="mt-2 text-xs text-fg-muted text-center">{item.caption}</figcaption>
+          part
+        ),
       )}
-    </figure>
+    </>
   )
 }
 
@@ -108,7 +107,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             {post.title}
           </h1>
 
-          <p className="text-sm text-fg-secondary leading-relaxed mb-12">
+          <p className="text-lg text-fg-secondary leading-relaxed mb-12">
             {post.summary}
           </p>
 
@@ -118,11 +117,11 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
               if (p.startsWith('## ')) {
                 if (mediaIndex < media.length) {
-                  elements.push(<MediaPlaceholder key={`media-${mediaIndex}`} item={media[mediaIndex]} />)
+                  elements.push(<BlogMediaItem key={`media-${mediaIndex}`} item={media[mediaIndex]} />)
                   mediaIndex++
                 }
                 elements.push(
-                  <h2 key={i} className="text-base font-medium text-fg mt-8 mb-3">
+                  <h2 key={i} className="font-display text-xl font-medium text-fg mt-10 mb-3">
                     {p.replace('## ', '')}
                   </h2>
                 )
@@ -131,9 +130,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               if (p.startsWith('- ') || p.startsWith('- [')) {
                 const items = p.split('\n').filter(Boolean)
                 elements.push(
-                  <ul key={i} className="list-disc list-inside space-y-1 text-fg-muted text-sm">
+                  <ul key={i} className="list-disc pl-5 space-y-1.5 text-fg-secondary text-base leading-relaxed">
                     {items.map((item, j) => (
-                      <li key={j}>{item.replace(/^- \*\*(.+?)\*\*/, '$1').replace(/^- \[.\] /, '').replace(/^- /, '')}</li>
+                      <li key={j}><Inline text={item.replace(/^- \[.\] /, '').replace(/^- /, '')} /></li>
                     ))}
                   </ul>
                 )
@@ -142,9 +141,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               if (p.startsWith('1. ')) {
                 const items = p.split('\n').filter(Boolean)
                 elements.push(
-                  <ol key={i} className="list-decimal list-inside space-y-1 text-fg-muted text-sm">
+                  <ol key={i} className="list-decimal pl-5 space-y-1.5 text-fg-secondary text-base leading-relaxed">
                     {items.map((item, j) => (
-                      <li key={j}>{item.replace(/^\d+\. \*\*(.+?)\*\*/, '$1').replace(/^\d+\. /, '')}</li>
+                      <li key={j}><Inline text={item.replace(/^\d+\. /, '')} /></li>
                     ))}
                   </ol>
                 )
@@ -159,9 +158,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                         {rows.map((row, j) => {
                           const cells = row.split('|').filter(Boolean).map((c) => c.trim())
                           return (
-                            <tr key={j} className={j === 0 ? 'bg-surface text-fg font-medium' : 'text-fg-muted'}>
+                            <tr key={j} className={j === 0 ? 'bg-surface text-fg font-medium' : 'text-fg-secondary'}>
                               {cells.map((cell, k) => (
-                                <td key={k} className="px-3 py-2 border-b border-border-subtle text-xs">{cell}</td>
+                                <td key={k} className="px-3 py-2 border-b border-border-subtle text-sm">{cell}</td>
                               ))}
                             </tr>
                           )
@@ -173,8 +172,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 return elements
               }
               elements.push(
-                <p key={i} className="text-sm text-fg-muted leading-relaxed">
-                  {p}
+                <p key={i} className="text-base text-fg-secondary leading-relaxed">
+                  <Inline text={p} />
                 </p>
               )
               return elements
@@ -183,7 +182,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             {mediaIndex < media.length && (
               <div className="mt-8 space-y-4">
                 {media.slice(mediaIndex).map((item, i) => (
-                  <MediaPlaceholder key={`remaining-media-${i}`} item={item} />
+                  <BlogMediaItem key={`remaining-media-${i}`} item={item} />
                 ))}
               </div>
             )}

@@ -6,7 +6,7 @@ export default function HeroSection() {
   return (
     <section className="relative min-h-[50vh] md:min-h-[85vh] flex items-end px-5 sm:px-8 pb-12 md:pb-20 pointer-events-none">
       <div className="relative z-10 max-w-6xl mx-auto w-full pointer-events-auto">
-        <p className="text-[11.5px] tracking-[0.25em] uppercase text-fg-muted font-semibold mb-8">
+        <p className="text-xs tracking-[0.25em] uppercase text-fg-muted font-semibold mb-8">
           Troy High School NJROTC
         </p>
         <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-light text-fg leading-[1.1] tracking-tight max-w-2xl">

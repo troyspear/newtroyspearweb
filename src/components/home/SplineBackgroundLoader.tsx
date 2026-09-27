@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useLayoutEffect } from 'react'
 import dynamic from 'next/dynamic'
 import { cn } from '@/lib/utils'
 
@@ -48,11 +48,11 @@ if (typeof window !== 'undefined' && window.location.pathname === '/' && shouldU
 }
 
 export default function SplineBackgroundLoader({ active }: { active: boolean }) {
-  // Lazy initializer, not an effect: the decision is available on the very
-  // first client render, saving a render + commit round trip before the
-  // canvas mounts. SSR renders false and the dynamic component's fallback is
-  // null, so the hydrated DOM still matches.
-  const [useSpline, setUseSpline] = useState(shouldUseSpline)
+  // Must start false to match SSR: deciding in a lazy initializer made the
+  // first client render differ (gradient classes + Spline's Suspense), which
+  // is a hydration mismatch. A layout effect still decides before first paint,
+  // and the chunk is already warm from the module-level import above.
+  const [useSpline, setUseSpline] = useState(false)
   const [splineReady, setSplineReady] = useState(false)
   const [hideFallback, setHideFallback] = useState(false)
 
@@ -69,7 +69,10 @@ export default function SplineBackgroundLoader({ active }: { active: boolean }) 
   // shaders compile. Resumes nothing: Spline covers it on ready.
   const initing = useSpline && !splineReady
 
-  // Resize only: the initial value comes from the lazy initializer above.
+  useLayoutEffect(() => {
+    setUseSpline(shouldUseSpline())
+  }, [])
+
   useEffect(() => {
     const check = () => setUseSpline(shouldUseSpline())
     window.addEventListener('resize', check)

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useLayoutEffect } from 'react'
+import { useState, useSyncExternalStore } from 'react'
 import dynamic from 'next/dynamic'
 import { cn } from '@/lib/utils'
 
@@ -37,6 +37,11 @@ function shouldUseSpline() {
   return true
 }
 
+function subscribeResize(onChange: () => void) {
+  window.addEventListener('resize', onChange)
+  return () => window.removeEventListener('resize', onChange)
+}
+
 // Warm the Spline chunk during client-bundle evaluation instead of waiting for
 // hydration + the first effect. The @splinetool runtime download then overlaps
 // hydration, and by the time we render the component the module is already in
@@ -48,11 +53,11 @@ if (typeof window !== 'undefined' && window.location.pathname === '/' && shouldU
 }
 
 export default function SplineBackgroundLoader({ active }: { active: boolean }) {
-  // Must start false to match SSR: deciding in a lazy initializer made the
-  // first client render differ (gradient classes + Spline's Suspense), which
-  // is a hydration mismatch. A layout effect still decides before first paint,
-  // and the chunk is already warm from the module-level import above.
-  const [useSpline, setUseSpline] = useState(false)
+  // The server snapshot (false) is used while hydrating so the first client
+  // render matches SSR; React then re-renders with the real value. Reading
+  // window during that first render was a hydration mismatch. The chunk is
+  // already warm from the module-level import above.
+  const useSpline = useSyncExternalStore(subscribeResize, shouldUseSpline, () => false)
   const [splineReady, setSplineReady] = useState(false)
   const [hideFallback, setHideFallback] = useState(false)
 
@@ -68,16 +73,6 @@ export default function SplineBackgroundLoader({ active }: { active: boolean }) 
   // init window - so it isn't compositing every frame behind the canvas while
   // shaders compile. Resumes nothing: Spline covers it on ready.
   const initing = useSpline && !splineReady
-
-  useLayoutEffect(() => {
-    setUseSpline(shouldUseSpline())
-  }, [])
-
-  useEffect(() => {
-    const check = () => setUseSpline(shouldUseSpline())
-    window.addEventListener('resize', check)
-    return () => window.removeEventListener('resize', check)
-  }, [])
 
   return (
     <div

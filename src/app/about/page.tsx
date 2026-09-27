@@ -5,7 +5,8 @@ import { ArrowRight } from 'lucide-react'
 import { getTeamYears, getMembersByYear } from '@/lib/data/team-members'
 import TeamGrid from '@/components/team/TeamGrid'
 
-const CURRENT_YEAR = '2025-2026'
+const CURRENT_YEAR = '2026-2027'
+const PREVIOUS_YEAR = '2025-2026'
 
 export const metadata: Metadata = {
   title: 'Team',
@@ -15,7 +16,8 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   const years = getTeamYears()
   const current = getMembersByYear(CURRENT_YEAR)
-  const underclassmen = current.filter((m) => m.grade !== undefined && m.grade <= 10).length
+  const returningNames = new Set(getMembersByYear(PREVIOUS_YEAR).map((m) => m.name))
+  const newMembers = current.filter((m) => !returningNames.has(m.name)).length
 
   return (
     <div className="pt-20 pb-16">
@@ -37,10 +39,10 @@ export default function AboutPage() {
                   Building the next crew
                 </h2>
                 <p className="mt-2 text-sm text-fg-secondary leading-relaxed">
-                  {underclassmen} of our {current.length} current members are
-                  freshmen or sophomores. New members work on real subsystems
-                  from their first season, so experience carries over as
-                  upperclassmen graduate.
+                  {newMembers} of our {current.length} members joined this
+                  season. New members work on real subsystems from their first
+                  season, and returning members lead each sub-team, so
+                  experience carries over as upperclassmen graduate.
                 </p>
                 <Link
                   href="/join"

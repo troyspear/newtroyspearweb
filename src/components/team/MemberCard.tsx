@@ -6,6 +6,7 @@ const avatarTone: Record<TeamMember['subTeam'], string> = {
   Mechanical: 'bg-amber-500/15 text-amber-800 dark:text-amber-300',
   Electrical: 'bg-emerald-500/15 text-emerald-800 dark:text-emerald-300',
   Software: 'bg-violet-500/15 text-violet-800 dark:text-violet-300',
+  'Business and Outreach': 'bg-sky-500/15 text-sky-800 dark:text-sky-300',
   General: 'bg-surface text-fg-secondary',
 }
 
@@ -17,7 +18,9 @@ function initials(name: string) {
 export default function MemberCard({ member }: { member: TeamMember }) {
   const hasImage = member.image && !member.image.includes('placeholder')
   const displayRole = member.role === 'Member' ? `${member.subTeam} Member` : member.role
-  const classOf = member.grade ? `Class of ${2026 + (12 - member.grade)}` : null
+  // Grade is as of the roster's season, so graduation year counts from that season's end.
+  const seasonEnd = Number(member.year.slice(-4))
+  const classOf = member.grade ? `Class of ${seasonEnd + (12 - member.grade)}` : null
 
   return (
     <div className="flex items-center gap-3 rounded-xl border border-border bg-elevated p-3 shadow-sm">

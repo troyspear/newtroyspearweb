@@ -41,7 +41,7 @@ export default function TDRsPage() {
               >
                 <div>
                   <div className="flex items-center justify-between mb-4">
-                    <span className="text-[10px] font-semibold text-accent bg-accent-subtle px-2.5 py-1 rounded-full uppercase tracking-wider">
+                    <span className="text-xs font-semibold text-accent bg-accent-subtle px-2.5 py-1 rounded-full uppercase tracking-wider">
                       {tdr.year}
                     </span>
                     <Link

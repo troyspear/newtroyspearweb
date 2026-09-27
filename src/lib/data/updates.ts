@@ -32,7 +32,7 @@ export const updates: Update[] = [
 	},
 	{
 		id: "3",
-		title: "CLAW: Initial Brainstorming",
+		title: "CLAW: From Brainstorming to a Compliant Design",
 		date: "2026-04-10",
 		slug: "claw-initial-brainstorming",
 	},

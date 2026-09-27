@@ -21,14 +21,23 @@
   --font-display: var(--font-nb-international), sans-serif;
 }
 
+/* Judges flagged small, low-contrast copy. Bump the two smallest steps of the
+   type scale site-wide rather than touching every text-xs/text-sm usage. */
+@theme {
+  --text-xs: 0.8125rem;
+  --text-xs--line-height: 1.55;
+  --text-sm: 0.9375rem;
+  --text-sm--line-height: 1.65;
+}
+
 :root {
   color-scheme: light;
   --page: #F8F9FA;
   --surface: #EDF1F7;
   --elevated: #FFFFFF;
   --fg: #1A1A1A;
-  --fg-secondary: #4A4A4A;
-  --fg-muted: #8A8A8A;
+  --fg-secondary: #33373F;
+  --fg-muted: #5B6270;
   --accent: #2563EB;
   --accent-subtle: rgba(37, 99, 235, 0.07);
   --border: #D0D7E2;
@@ -43,8 +52,8 @@
   --surface: #151822;
   --elevated: #1C2030;
   --fg: #F8F9FA;
-  --fg-secondary: #D1D5DB;
-  --fg-muted: #9CA3AF;
+  --fg-secondary: #E2E5EA;
+  --fg-muted: #AEB4BF;
   --accent: #60A5FA;
   --accent-subtle: rgba(96, 165, 250, 0.1);
   --border: #1E2336;

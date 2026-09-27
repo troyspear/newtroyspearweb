@@ -15,13 +15,13 @@ export default function BlogList() {
   return (
     <>
       <CategoryFilter selected={category} onSelect={setCategory} />
-      <div className="mt-6">
+      <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
         {filtered.map((post) => (
           <BlogCard key={post.slug} post={post} />
         ))}
       </div>
       {filtered.length === 0 && (
-        <p className="text-xs text-fg-muted mt-8">No posts in this category.</p>
+        <p className="text-sm text-fg-muted mt-8">No posts in this category.</p>
       )}
     </>
   )

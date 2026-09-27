@@ -87,7 +87,7 @@ export default function SubmarineViewer() {
       ) : (
         <ViewerFallback />
       )}
-      <div className="absolute bottom-3 left-3 text-[11px] text-fg-muted pointer-events-none">
+      <div className="absolute bottom-3 left-3 text-xs text-fg-muted pointer-events-none">
         Drag to rotate &middot; Scroll to zoom
       </div>
     </div>

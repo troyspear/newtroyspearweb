@@ -23,6 +23,13 @@ const STATIC_PAGES: SearchItem[] = [
   { title: 'Contact', description: 'Get in touch with Troy SPEAR', href: '/contact', category: 'Pages' },
   { title: 'Technical Design Reports', description: 'TDRs from past competition years', href: '/vehicle/tdrs', category: 'Pages' },
   { title: 'Past Vehicles', description: 'Krabby Patty, Aura, Sea++', href: '/vehicle/past/krabby-patty', category: 'Pages' },
+  { title: 'ORCA Specifications', description: 'Computer, cameras, power, frame, and software', href: '/vehicle#specs', category: 'Pages' },
+  { title: 'ORCA Claw', description: 'Hybrid compliant PLA + TPU claw with double-joint linkage', href: '/vehicle#claw', category: 'Pages' },
+  { title: 'ORCA Dropper', description: 'Two-barrel marker dropper for the Recon task', href: '/vehicle#dropper', category: 'Pages' },
+  { title: 'ORCA Torpedo', description: 'Self-propelled electric torpedo', href: '/vehicle#torpedo', category: 'Pages' },
+  { title: 'ORCA Power & Kill Switch', description: 'Power distribution board and hard kill switch', href: '/vehicle#power', category: 'Pages' },
+  { title: 'ORCA Software', description: 'ROS 2 architecture, YOLO26 vision, localization', href: '/vehicle#software', category: 'Pages' },
+  { title: 'ORCA Testing', description: 'Marker drop tests, pool trials, test protocols', href: '/vehicle#testing', category: 'Pages' },
 ]
 
 async function buildSearchData(): Promise<SearchItem[]> {
@@ -192,7 +199,7 @@ export default function SearchModal({ isOpen, onClose }: { isOpen: boolean; onCl
             <div className="max-h-72 overflow-y-auto p-1.5">
               {Object.entries(grouped).map(([category, items]) => (
                 <div key={category} className="mb-1">
-                  <div className="px-3 py-1.5 text-[11px] font-medium text-fg-muted uppercase tracking-wider">
+                  <div className="px-3 py-1.5 text-xs font-medium text-fg-muted uppercase tracking-wider">
                     {category}
                   </div>
                   {items.map((item, i) => {
@@ -207,7 +214,7 @@ export default function SearchModal({ isOpen, onClose }: { isOpen: boolean; onCl
                         <Icon className="w-3.5 h-3.5 text-fg-muted shrink-0" />
                         <div className="min-w-0">
                           <div className="text-sm text-fg truncate">{item.title}</div>
-                          <div className="text-[11px] text-fg-muted truncate">{item.description}</div>
+                          <div className="text-xs text-fg-muted truncate">{item.description}</div>
                         </div>
                       </Link>
                     )

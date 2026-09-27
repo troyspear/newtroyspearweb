@@ -15,22 +15,22 @@ export default function MissionSection() {
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <div>
-            <h2 className="font-display text-sm font-medium text-fg-muted uppercase tracking-wide mb-4">
+            <h2 className="font-display text-xs font-semibold text-accent uppercase tracking-wider mb-4">
               Our Mission
             </h2>
             <p className="text-2xl sm:text-3xl font-display font-light text-fg leading-snug">
               Engineering autonomous underwater vehicles from the ground up.
             </p>
-            <p className="mt-6 text-fg-secondary text-[15px] leading-relaxed">
+            <p className="mt-6 text-fg-secondary text-base leading-relaxed">
               SPEAR is Troy High School&apos;s NJROTC underwater robotics team. We design, build, and program fully autonomous submarines to compete in the annual RoboNation RoboSub competition, tackling challenges in mechanical engineering, computer vision, and control systems.
             </p>
-            <div className="grid grid-cols-4 gap-4 mt-10">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-10">
               {stats.map((stat) => (
-                <div key={stat.label}>
+                <div key={stat.label} className="rounded-xl border border-border bg-elevated px-4 py-3 shadow-sm">
                   <span className="font-display text-2xl sm:text-3xl font-light text-accent">
                     {stat.value}
                   </span>
-                  <p className="mt-1 text-[11px] text-fg-muted uppercase tracking-wider">
+                  <p className="mt-1 text-xs text-fg-secondary uppercase tracking-wider">
                     {stat.label}
                   </p>
                 </div>
